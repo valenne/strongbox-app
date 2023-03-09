@@ -1,0 +1,50 @@
+/* custom css */
+/* general styles */
+body {
+	margin: 0px auto;
+}
+li {
+	list-style: none;
+}
+
+/* helpers */
+
+.flex-center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+/* navbar component */
+.navbar__container {
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+	justify-content: center;
+	align-items: center;
+	padding: 20px 30px;
+}
+
+.navbar__container > li > a {
+	color: #fff;
+}
+
+/* form style */
+.register__form {
+	display: flex;
+	flex-direction: column;
+	max-width: 800px;
+	gap: 10px;
+	padding: 20px;
+	margin: 0 auto;
+}
+
+.register__form div {
+	display: flex;
+	flex-direction: column;
+	flex: 0 1 auto;
+}
+
+button[type='submit'] {
+	margin-top: 15px;
+}
