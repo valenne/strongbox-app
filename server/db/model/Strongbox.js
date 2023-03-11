@@ -5,8 +5,19 @@ import User from './User.js'
 const { Schema, model } = mongoose
 
 const strongBoxSchema = new Schema({
+  user: {
+    type: SchemaTypes.ObjectId,
+    ref: 'User',
+    required: true
+  },
   services: [
     {
+      category: {
+        type: String,
+        lowercase: true,
+        trim: true,
+        default: 'General'
+      },
       name: {
         type: String,
         loweCase: true,
@@ -26,6 +37,11 @@ const strongBoxSchema = new Schema({
         default: new Date().toLocaleString(),
         inmutable: true
       },
+
+      updateAt: {
+        type: String,
+        default: new Date().toLocaleString()
+      },
       pin: {
         type: Number,
         default: 0000,
@@ -37,12 +53,7 @@ const strongBoxSchema = new Schema({
         }
       }
     }
-  ],
-  user: {
-    type: SchemaTypes.ObjectId,
-    ref: 'User',
-    required: true
-  }
+  ]
 })
 
 export const strongBox = model('StrongBox', strongBoxSchema)
