@@ -7,8 +7,10 @@ export async function loginUser (loginData) {
       loginData
     )
 
-    console.log('charmander', response)
+    return response
   } catch (e) {
-    console.log(e.message)
+    console.log(e.response.data.error)
+    const error = e.response
+    return error
   }
 }

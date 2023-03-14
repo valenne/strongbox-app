@@ -86,3 +86,17 @@ button[type='submit'] {
 		transform: rotate(360deg);
 	}
 }
+
+/* error input post login */
+.errorInputVisible {
+	display: block;
+	height: 20px;
+	color: red;
+	opacity: 1;
+}
+
+.errorInputHidden {
+	display: block;
+	height: 20px;
+	opacity: 0;
+}

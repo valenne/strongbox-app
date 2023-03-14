@@ -13,6 +13,13 @@ export const registerController = {
     let { firstName, lastName, email, password, question, answer, username } =
       response
 
+    const isEmailExist = await User.findOne({ email: email })
+    if (isEmailExist) {
+      return res
+        .status(400)
+        .json({ error: 'Email has already been registered' })
+    }
+
     try {
       const hashedPwd = await bcrypt.hash(password, envConfig.saltRounds)
 

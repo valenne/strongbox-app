@@ -4,6 +4,7 @@ import Input from './header/register/Input.jsx'
 import { useHandleRegister } from '../hooks/useHandleRegister.js'
 import { useNavigate } from 'react-router-dom'
 
+// return if the obj has a value inside
 const objectHasData = obj => {
   return Object.keys(obj).length
 }
@@ -20,7 +21,6 @@ function Register () {
 
     registerProcess(response)
   }
-  console.log(saveData)
 
   const loadingAnimation = () => {
     setTimeout(() => {

@@ -9,5 +9,6 @@ export const envConfig = {
   dbPort: process.env.PORT_DB,
   dbName: process.env.DB_NAME,
   serverPort: process.env.PORT_SERVER || 8080,
-  saltRounds: +process.env.SALT_ROUNDS
+  saltRounds: +process.env.SALT_ROUNDS,
+  token: process.env.TOKEN_SECRET
 }
