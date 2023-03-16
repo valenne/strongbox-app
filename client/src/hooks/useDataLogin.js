@@ -1,16 +1,13 @@
-import { useEffect, useState, useContext } from 'react'
-
-import { UserDataContext } from '../context/UserDataContext.jsx'
+import { useEffect, useState } from 'react'
 
 export function useCredential () {
-  const { loginInfo } = useContext(UserDataContext)
-
   const [responseLogin, setResponseLogin] = useState({})
   const [error, setError] = useState(null)
 
   useEffect(() => {
     if (responseLogin.data?.token) {
-      loginInfo.current = responseLogin
+      setError(null)
+
       return
     }
 
@@ -30,5 +27,5 @@ export function useCredential () {
     setError(null)
   }, 3000)
 
-  return { error, setResponseLogin }
+  return { error, setResponseLogin, responseLogin }
 }

@@ -8,6 +8,13 @@ li {
 }
 
 /* helpers */
+.displayNone {
+	display: none;
+}
+
+.displayBlock {
+	display: block;
+}
 
 .flex-center {
 	display: flex;

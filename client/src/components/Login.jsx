@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useRef, useEffect } from 'react'
 import Input from './header/register/Input.jsx'
 import { loginUser } from '../services/loginUser.js'
 import { useNavigate } from 'react-router-dom'
@@ -7,23 +7,24 @@ import toast, { Toaster } from 'react-hot-toast'
 // hook
 import { useCredential } from '../hooks/useDataLogin.js'
 
-// context
-import { UserDataContext } from '../context/UserDataContext.jsx'
-
 function Login () {
-  const { loginInfo } = useContext(UserDataContext)
+  const userRef = useRef(null)
   const navigate = useNavigate()
-  const { error, setResponseLogin } = useCredential()
+  const { error, setResponseLogin, responseLogin } = useCredential()
 
   const handleLogin = e => {
     e.preventDefault()
     const loginData = Object.fromEntries(new window.FormData(e.target))
     loginUser(loginData).then(res => {
       setResponseLogin(res)
+      if (!res.data.error) {
+        userRef.current = responseLogin
+      }
     })
+  }
 
-    // toast alert
-    if (loginInfo.current) {
+  useEffect(() => {
+    if (userRef.current) {
       const toastId = toast.loading('Loading...')
 
       setTimeout(() => {
@@ -35,7 +36,7 @@ function Login () {
         }, 2000)
       }, 2500)
     }
-  }
+  }, [userRef.current])
 
   return (
     <div className='flex-center'>

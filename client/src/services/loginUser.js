@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import axios from 'axios'
 
 export async function loginUser (loginData) {
@@ -6,7 +7,11 @@ export async function loginUser (loginData) {
       'http://localhost:3000/login-user',
       loginData
     )
+    // console.log('blastoise', response)
 
+    if (response.data.token) {
+      localStorage.setItem('user', JSON.stringify(response.data))
+    }
     return response
   } catch (e) {
     console.log(e.response.data.error)

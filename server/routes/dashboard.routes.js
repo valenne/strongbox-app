@@ -5,5 +5,6 @@ import { dashboardController } from '../controllers/dashboard.controllers.js'
 const router = Router()
 
 router.get('/dashboard', dashboardController.getDashboard)
+router.post('/dashboard', dashboardController.postDashboard)
 
 export { router as dashboardRouter }

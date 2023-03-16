@@ -1,7 +1,7 @@
 import express from 'express'
 import { mongooseConnected } from './db/db.connect.js'
-import bodyParser from 'body-parser'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 
 // importing Routes
 import {
@@ -18,7 +18,7 @@ const app = express()
 mongooseConnected()
 
 // middleware
-
+app.use(cookieParser())
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

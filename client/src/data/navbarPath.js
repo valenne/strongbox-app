@@ -10,5 +10,9 @@ export const navbarPath = {
   register: {
     name: 'Register',
     path: '/register'
+  },
+  dashboard: {
+    name: 'Dashboard',
+    path: '/dashboard'
   }
 }
