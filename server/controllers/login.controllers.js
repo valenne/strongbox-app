@@ -2,6 +2,7 @@ import { User } from '../db/model/User.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { envConfig } from '../config/env.config.js'
+import { getDateRecord } from '../assets/js/getTimer.js'
 
 export const loginController = {
   postLogin: async (req, res) => {
@@ -31,14 +32,19 @@ export const loginController = {
 
       const token = jwt.sign(
         {
+          data: auth,
           exp: Math.floor(Date.now() / 1000) + 60 * 60,
-          data: auth
+          iat: Math.floor(Date.now())
         },
         envConfig.token
       )
 
-      console.log('Login Succesfully', { auth, token })
-      res.cookie('auth', token)
+      console.log(
+        `${getDateRecord()} - Login Succesfully - ${user.firstName} ${
+          user.lastName
+        }`
+      )
+
       res.status(200).send({ token, auth })
     } catch (e) {
       console.log(e.message)

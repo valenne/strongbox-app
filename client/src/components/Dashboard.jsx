@@ -3,20 +3,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-async function getDashboardData (items) {
-  const { token } = JSON.parse(localStorage.getItem('user'))
-
-  // to send a token from frontend to backend, we need to use the verb post
-  // to the authenticate route, or middleware, then we can figure the next logic for our route dashboard
-  const res = await axios.post('http://localhost:3000/dashboard', items, {
-    headers: {
-      Authentication: token,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  })
-
-  return { res }
-}
+import { getUserPermission } from '../services/getUserPermission.js'
+import { storageLogic } from '../data/localStorageData.js'
 
 // component
 function Dashboard () {
@@ -24,20 +12,25 @@ function Dashboard () {
   const navigate = useNavigate()
 
   const logout = () => {
-    localStorage.removeItem('user')
+    storageLogic.deleteStorage('user')
     window.alert('Good Night')
     navigate('/login', { replace: true })
   }
-  // seguir con dashboard grid y posterior
-
-  getDashboardData(items)
 
   useEffect(() => {
-    const itemsLocale = JSON.parse(localStorage.getItem('user'))
-    if (itemsLocale) {
-      console.log(itemsLocale)
-      setItems(itemsLocale)
+    const getDataPostValidation = async () => {
+      const { isAuthorized, localData } = await getUserPermission(navigate)
+      if (!isAuthorized || !localData) return
+
+      if (isAuthorized.data.status) {
+        const gettingData = await axios.get(
+          `http://localhost:3000/dashboard/user/${localData.auth.id}`
+        )
+        console.log(gettingData)
+      }
     }
+
+    getDataPostValidation().catch(e => console.log(e.message))
   }, [])
 
   return (

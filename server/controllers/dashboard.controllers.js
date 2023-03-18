@@ -1,14 +1,12 @@
+import { getDateRecord } from '../assets/js/getTimer.js'
+
 export const dashboardController = {
   getDashboard: (req, res) => {
-    const head = req.headers
-    console.log(head)
-    res.status(200).send({ response: 'Get http sending' })
+    const test = req.params
+
+    res.status(200).send({ user: 'working in dashboard', id: test })
   },
   postDashboard: (req, res) => {
-    const head = req.headers
-    console.log(head)
-    res.status(200).send("Here's the info you requested")
+    res.status(200).send({ status: 'success', msg: 'token validate' })
   }
 }
-
-// aca problemas con el cookie y elheader depende cual use
