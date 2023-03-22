@@ -1,7 +1,10 @@
-import { User } from '../db/model/User.js'
 import bcrypt from 'bcrypt'
+import { User } from '../db/model/User.js'
 import { envConfig } from '../config/env.config.js'
 import { randomPassword } from '../assets/js/randomPassword.js'
+import { getImageFromAPi } from '../data/getRandomImage.js'
+
+import { getDateRecord } from '../assets/js/getTimer.js'
 
 export const registerController = {
   postRegister: async (req, res) => {
@@ -15,6 +18,7 @@ export const registerController = {
 
     const isEmailExist = await User.findOne({ email: email })
     if (isEmailExist) {
+      console.log(`${getDateRecord()} - email already exist`)
       return res
         .status(400)
         .json({ error: 'Email has already been registered' })
@@ -23,10 +27,13 @@ export const registerController = {
     try {
       const hashedPwd = await bcrypt.hash(password, envConfig.saltRounds)
 
+      const urlImage = await getImageFromAPi()
+
       const stored = {
         firstName,
         lastName,
         username,
+        avatarImage: urlImage,
         email,
         password: hashedPwd,
         recoveryLogin: {
@@ -39,7 +46,7 @@ export const registerController = {
 
       const insertResult = await User.create(stored)
 
-      console.log(insertResult)
+      console.log(`${getDateRecord()} - register user successfully`)
 
       res.status(200).send({
         status: 'Ok',
@@ -51,7 +58,7 @@ export const registerController = {
         }
       })
     } catch (e) {
-      console.log(e.message)
+      console.log(`${getDateRecord} - register user failed`)
       res.status(400).send({ status: 'failed', code: 400, values: null })
     }
   }

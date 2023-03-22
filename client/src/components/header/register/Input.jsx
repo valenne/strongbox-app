@@ -23,10 +23,15 @@ function Input ({ string, value, placeholder, type = 'text', isTypeSelect }) {
           </select>
         </div>
       ) : (
-        <div>
-          <label htmlFor={value}>{string}</label>
+        <div className='flex flex-col gap-3 m-auto px-5'>
+          <label
+            className='text-cyan-50 text-lg pt-2 pr-2 pb-2'
+            htmlFor={value}
+          >
+            {string}
+          </label>
           <input
-            className='form__input'
+            className='text-slate-900 font-semibold placeholder:text-[#271f306b] p-2 caret-[#271F30] outline-none ring-2 focus:ring-cyan-400 rounded-md bg-[#889FAF]'
             type={type}
             name={value}
             id={value}

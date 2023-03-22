@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export function useCredential () {
+export const useCredential = () => {
   const [responseLogin, setResponseLogin] = useState({})
   const [error, setError] = useState(null)
 

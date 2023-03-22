@@ -39,32 +39,47 @@ function Login () {
   }, [userRef.current])
 
   return (
-    <div className='flex-center'>
+    <div className='flex flex-col justify-center align-middle mt-20'>
       <Toaster position='top-right' reverseOrder={false} />
-      <form onSubmit={handleLogin} className='register__form'>
-        <Input string='Username' value='username' placeholder='isDoe' />
-        <span
-          className={`${
-            error?.match(/user/) ? 'errorInputVisible' : 'errorInputHidden'
-          }`}
-        >
-          {error?.match(/user/) && 'Username is not valid'}
-        </span>
-        <Input
-          string='Password'
-          value='password'
-          placeholder='******'
-          type='password'
-        />
-        <span
-          className={`${
-            error?.match(/password/) ? 'errorInputVisible' : 'errorInputHidden'
-          }`}
-        >
-          {error?.match(/password/) && 'Password not matched'}
-        </span>
-
-        <button type='submit'>Login</button>
+      <form
+        onSubmit={handleLogin}
+        className='min-w-4xl p-5 m-auto rounded-xl bg-[#3F3F50] drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]'
+      >
+        <div className='flex flex-col gap-3 min-w-full'>
+          <Input string='Username' value='username' placeholder='isDoe' />
+          <span
+            className={`${
+              error?.match(/user/)
+                ? 'block h-5 opacity-1 text-red-500 px-5'
+                : 'block h-5 opacity-0'
+            }`}
+          >
+            {error?.match(/user/) && 'Username is not valid'}
+          </span>
+          <Input
+            string='Password'
+            value='password'
+            placeholder='******'
+            type='password'
+          />
+          <span
+            className={`${
+              error?.match(/password/)
+                ? 'block h-5 opacity-1 text-red-500 px-5'
+                : 'block h-5 opacity-0'
+            }`}
+          >
+            {error?.match(/password/) && 'Password not matched'}
+          </span>
+          <div className='m-auto w-full px-5 grid place-items-center'>
+            <button
+              className='w-full py-3 px-5 bg-[#271F30] hover:bg-black duration-300 text-cyan-50 rounded-lg drop-shadow-lg'
+              type='submit'
+            >
+              Login
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   )

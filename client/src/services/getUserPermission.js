@@ -10,7 +10,23 @@ export async function getUserPermission (navigate) {
 
   if (!localData) {
     window.alert('unauthorized to access dashboard, please login')
-    return navigate('/login', { replace: true })
+
+    // keep tracking permissions on backend
+    try {
+      await axios.post(
+        'http://localhost:3000/dashboard',
+        { data: null },
+        {
+          headers: {
+            Authentication: undefined,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+      )
+    } catch (e) {
+      return { isNotAuthorized: true }
+    }
+    // return navigate('/login', { replace: true })
   }
 
   try {
@@ -19,7 +35,7 @@ export async function getUserPermission (navigate) {
 
     const isAuthorized = await axios.post(
       'http://localhost:3000/dashboard',
-      id,
+      { id },
       {
         headers: {
           Authentication: localData.token,
@@ -27,6 +43,7 @@ export async function getUserPermission (navigate) {
         }
       }
     )
+
     return { isAuthorized, localData }
   } catch (e) {
     if (e.response?.data.error) {

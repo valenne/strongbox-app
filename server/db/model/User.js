@@ -44,6 +44,9 @@ const userSchema = new Schema({
     trim: true,
     unique: true
   },
+  avatarImage: {
+    type: 'string'
+  },
   email: {
     type: String,
     required: true,

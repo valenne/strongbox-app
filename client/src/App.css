@@ -1,20 +1,21 @@
 /* custom css */
 /* general styles */
+:root {
+	--bgColor: #271f30;
+}
+
+/* a {
+	font-style: none;
+} */
 body {
 	margin: 0px auto;
+	background-color: var(--bgColor);
 }
-li {
+/* li {
 	list-style: none;
-}
+} */
 
 /* helpers */
-.displayNone {
-	display: none;
-}
-
-.displayBlock {
-	display: block;
-}
 
 .flex-center {
 	display: flex;
@@ -23,28 +24,32 @@ li {
 	align-items: center;
 }
 /* navbar component */
-.navbar__container {
+
+/* .navbar__container {
 	display: flex;
 	flex-direction: row;
 	gap: 15px;
 	justify-content: center;
 	align-items: center;
 	padding: 20px 30px;
-}
+} */
 
 .navbar__container > li > a {
 	color: #fff;
 }
+/* .navLinks > a:link {
+	text-decoration: none;
+} */
 
 /* form style */
-.register__form {
+/* .register__form {
 	display: flex;
 	flex-direction: column;
 	max-width: 800px;
 	gap: 10px;
 	padding: 20px;
 	margin: 0 auto;
-}
+} */
 
 .register__form div {
 	display: flex;
@@ -106,4 +111,97 @@ button[type='submit'] {
 	display: block;
 	height: 20px;
 	opacity: 0;
+}
+
+/* dashboard-section */
+.section-dashboard {
+	padding: 20px 20px;
+}
+.dboard-wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	/* grid-auto-rows: 1fr; */
+	gap: 20px 20px;
+	grid-auto-flow: row;
+	grid-template-areas:
+		'image dashboard dashboard dashboard dashboard'
+		'data dashboard dashboard dashboard dashboard'
+		'categories dashboard dashboard dashboard dashboard';
+}
+.image-container {
+	display: grid;
+	place-self: center;
+	padding: 10px;
+}
+
+.image {
+	grid-area: image;
+	width: 100%;
+	height: 100%;
+}
+.data {
+	grid-area: data;
+	height: 100%;
+}
+
+.categories {
+	grid-area: categories;
+	height: 200px;
+}
+
+.dashboard {
+	grid-area: dashboard;
+}
+
+.profile-container {
+	width: 100%;
+}
+.profile-image {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+.user-information {
+	padding: 10px;
+}
+
+.user-tag {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.user-tag > span {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.user-tag > p {
+	font-size: 18px;
+	/* margin: 5px 0 5px 20px; */
+	margin: 5px 0 5px 0;
+}
+
+.data-title-container {
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 100px;
+	gap: 10px;
+}
+
+.data-title {
+	font-size: 32px;
+	margin: 0;
+}
+
+.data-new-button {
+	margin-bottom: 30px;
+	font-size: 14px;
+	padding: 12px 24px;
 }

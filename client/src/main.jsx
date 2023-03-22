@@ -5,12 +5,12 @@ import './index.css'
 
 import { BrowserRouter } from 'react-router-dom'
 
-import { UserDataContextProvider } from './context/UserDataContext.jsx'
+import { HelperContextProvider } from './context/HelperContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <UserDataContextProvider>
+    <HelperContextProvider>
       <App />
-    </UserDataContextProvider>
+    </HelperContextProvider>
   </BrowserRouter>
 )

@@ -4,7 +4,7 @@ import User from './User.js'
 
 const { Schema, model } = mongoose
 
-const strongBoxSchema = new Schema({
+const KeySchema = new Schema({
   user: {
     type: SchemaTypes.ObjectId,
     ref: 'User',
@@ -56,4 +56,4 @@ const strongBoxSchema = new Schema({
   ]
 })
 
-export const strongBox = model('StrongBox', strongBoxSchema)
+export const strongBox = model('Key', KeySchema)
