@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { storageLogic } from '../data/localStorageData.js'
+import { storageLogic } from '../data/dataExports.js'
 
 export async function getUserPermission (navigate) {
   // find if exist localstorage saved

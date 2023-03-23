@@ -33,50 +33,62 @@ function Register () {
   return (
     <>
       {objectHasData(saveData.current) ? (
-        <div className='flex-center'>{loadingAnimation()}</div>
+        <div className='flex flex-col justify-center align-middle'>
+          {loadingAnimation()}
+        </div>
       ) : (
-        <div className='flex-center'>
-          <h2>Register Form</h2>
-          <form onSubmit={handleSubmit} className='register__form'>
-            <Input string='First Name' value='firstName' placeholder='Jhon' />
-            <Input string='Last Name' value='lastName' placeholder='Doe' />
-            <Input string='Username' value='username' placeholder='isDoe' />
-            <Input
-              string='Email'
-              value='email'
-              placeholder='jhondoe@mail.com'
-              type='email'
-            />
-            <Input
-              string='Password'
-              value='password'
-              placeholder='******'
-              type='password'
-            />
-            <Input
-              string='Recovery Question?'
-              value='question'
-              placeholder=''
-              type='question'
-              isTypeSelect
-            />
-            <Input
-              string='Answer'
-              value='answer'
-              placeholder='...'
-              type='text'
-            />
-            <button
-              style={{
-                border: '1px solid transparent',
-                borderColor: error ? 'red' : 'transparent'
-              }}
-              type='submit'
-            >
-              {loading ? 'Loading...' : 'Buscar'}
-            </button>
+        <div className='flex flex-col justify-center align-middle w-fit m-auto'>
+          <h2 className='text-cyan-50 text-2xl p-5 text-center mt-10 mb-5'>
+            Register Form
+          </h2>
+          <form
+            className='w-min-fit p-5 rounded-xl bg-[#3F3F50] drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]'
+            onSubmit={handleSubmit}
+          >
+            <div className='flex flex-col gap-2 px-2 w-full'>
+              <Input string='First Name' value='firstName' placeholder='Jhon' />
+              <Input string='Last Name' value='lastName' placeholder='Doe' />
+              <Input string='Username' value='username' placeholder='isDoe' />
+              <Input
+                string='Email'
+                value='email'
+                placeholder='jhondoe@mail.com'
+                type='email'
+              />
+              <Input
+                string='Password'
+                value='password'
+                placeholder='******'
+                type='password'
+              />
+              <Input
+                string='Recovery Question?'
+                value='question'
+                placeholder=''
+                type='question'
+                isTypeSelect
+              />
+              <Input
+                string='Answer'
+                value='answer'
+                placeholder='...'
+                type='text'
+              />
+              <div className='m-auto w-full px-5 grid place-items-center mt-5'>
+                <button
+                  className='w-full py-3 px-5 bg-[#271F30] hover:bg-black duration-300 text-cyan-50 rounded-lg drop-shadow-lg border-1 border-solid border-transparent'
+                  style={{
+                    // border: '1px solid transparent',
+                    borderColor: error ? 'red' : 'transparent'
+                  }}
+                  type='submit'
+                >
+                  {loading ? 'Loading...' : 'Sign in'}
+                </button>
+              </div>
 
-            <p>{error ?? error}</p>
+              <p>{error ?? error}</p>
+            </div>
           </form>
         </div>
       )}

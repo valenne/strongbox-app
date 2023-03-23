@@ -39,11 +39,15 @@ function Login () {
   }, [userRef.current])
 
   return (
-    <div className='flex flex-col justify-center align-middle mt-20'>
+    <div className='flex flex-col justify-center align-middle'>
       <Toaster position='top-right' reverseOrder={false} />
+
+      <h2 className='text-cyan-50 text-2xl p-5 text-center mt-10 mb-5'>
+        Login
+      </h2>
       <form
         onSubmit={handleLogin}
-        className='min-w-4xl p-5 m-auto rounded-xl bg-[#3F3F50] drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]'
+        className='min-w-4xl p-5 m-auto rounded-xl bg-[#3F3F50]  drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]'
       >
         <div className='flex flex-col gap-3 min-w-full'>
           <Input string='Username' value='username' placeholder='isDoe' />

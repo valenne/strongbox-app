@@ -1,8 +1,8 @@
 /* eslint-disable multiline-ternary */
 import React from 'react'
-import { navbarPath } from '../../../data/navbarPath.js'
+
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { storageLogic } from '../../../data/localStorageData.js'
+import { storageLogic, navbarPath } from '../../../data/dataExports.js'
 
 function NavbarGeneral () {
   const { pathname } = useLocation()

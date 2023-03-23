@@ -5,9 +5,11 @@ import { HelperContext } from '../../context/HelperContext.jsx'
 function Header () {
   const { inDashboard, setInDashboard } = useContext(HelperContext)
   return (
-    <header>
-      <Navbar onDashboard={inDashboard} setInDashboard={setInDashboard} />
-    </header>
+    <section id='header'>
+      <header className='z-10'>
+        <Navbar onDashboard={inDashboard} setInDashboard={setInDashboard} />
+      </header>
+    </section>
   )
 }
 

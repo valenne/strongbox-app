@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { questions } from '../data/recoveryQuestion.js'
+import { questions } from '../data/dataExports.js'
 
 // hook questionLists
 export const useQuestionList = () => {

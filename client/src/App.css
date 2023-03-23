@@ -17,12 +17,12 @@ body {
 
 /* helpers */
 
-.flex-center {
+/* .flex-center {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
+} */
 /* navbar component */
 
 /* .navbar__container {
