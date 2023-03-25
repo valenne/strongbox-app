@@ -9,7 +9,7 @@ function Input ({ string, value, placeholder, type = 'text', isTypeSelect }) {
   return (
     <>
       {isTypeSelect ? (
-        <div className='flex flex-col gap-3 m-auto px-5'>
+        <div className=' w-full flex flex-col gap-3 m-auto px-5'>
           <label
             className='text-cyan-50 text-lg pt-2 pr-2 pb-2'
             htmlFor={value}
@@ -17,16 +17,17 @@ function Input ({ string, value, placeholder, type = 'text', isTypeSelect }) {
             {string}
           </label>
           <select
-            className='text-cyan-50 font-semibold placeholder:text-[#b9dfee5b] p-2 caret-[#271F30] outline-none ring-2 ring-[#707F8F] focus:ring-cyan-400 rounded-md bg-[#271f306b]'
+            className='block overflow-hidden text-ellipsis text-cyan-50 font-semibold placeholder:text-[#b9dfee5b] p-2 caret-[#271F30] outline-none ring-2 ring-[#707F8F] focus:ring-cyan-400 rounded-md bg-[#271f306b]'
             name={value}
             id={value}
             required
           >
-            <option value='' disabled>
-              Choose a Question?
-            </option>
             {questions.map((question, index) => (
-              <option key={index} value={question}>
+              <option
+                className='block text-ellipsis'
+                key={index}
+                value={question}
+              >
                 {question}
               </option>
             ))}
