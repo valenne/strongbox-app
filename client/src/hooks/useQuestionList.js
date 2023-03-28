@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { questions } from '../data/dataExports.js'
+import { questions } from '../data/recoveryQuestion.js'
+import { registerDataInput } from '../data/dataExports.js'
 
 // hook questionLists
 export const useQuestionList = () => {
@@ -15,5 +16,5 @@ export const useQuestionList = () => {
     return values
   }
 
-  return { questionList, renderOptions }
+  return { questionList, renderOptions, registerDataInput }
 }

@@ -114,9 +114,7 @@ button[type='submit'] {
 }
 
 /* dashboard-section */
-.section-dashboard {
-	padding: 20px 20px;
-}
+
 .dboard-wrapper {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -135,11 +133,11 @@ button[type='submit'] {
 	padding: 10px;
 }
 
-.image {
+/* .image {
 	grid-area: image;
 	width: 100%;
 	height: 100%;
-}
+} */
 .data {
 	grid-area: data;
 	height: 100%;
@@ -150,19 +148,19 @@ button[type='submit'] {
 	height: 200px;
 }
 
-.dashboard {
+/* .dashboard {
 	grid-area: dashboard;
-}
+} */
 
-.profile-container {
+/* .profile-container {
 	width: 100%;
-}
-.profile-image {
+} */
+/* .profile-image {
 	width: 200px;
 	height: 200px;
 	border-radius: 50%;
 	object-fit: cover;
-}
+} */
 .user-information {
 	padding: 10px;
 }

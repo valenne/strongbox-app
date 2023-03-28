@@ -2,13 +2,13 @@ import bcrypt from 'bcrypt'
 import { User } from '../db/model/User.js'
 import { envConfig } from '../config/env.config.js'
 import { randomPassword } from '../assets/js/randomPassword.js'
-import { getImageFromAPi } from '../data/getRandomImage.js'
 
 import { getDateRecord } from '../assets/js/getTimer.js'
 
 export const registerController = {
   postRegister: async (req, res) => {
     const response = req.body
+
     if (!response) {
       return res.status(400).json({ error: 'required parameter missing' })
     }
@@ -27,7 +27,8 @@ export const registerController = {
     try {
       const hashedPwd = await bcrypt.hash(password, envConfig.saltRounds)
 
-      const urlImage = await getImageFromAPi()
+      // const urlImage = await getImageFromAPi()
+      const urlImage = `https://api.multiavatar.com/${firstName} ${lastName}.svg`
 
       const stored = {
         firstName,

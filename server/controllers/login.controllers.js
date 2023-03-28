@@ -12,14 +12,14 @@ export const loginController = {
       const user = await User.findOne({ username })
 
       if (!user) {
-        console.log('User not found')
+        console.log(`${getDateRecord()} - User not found`)
         return res.status(400).json({ error: 'User not found' })
       }
 
       const validPaswword = await bcrypt.compare(password, user.password)
 
       if (!validPaswword) {
-        console.log('Password incorrect')
+        console.log(`${getDateRecord()} - Password incorrect`)
         return res.status(400).json({ error: 'Invalid password' })
       }
 

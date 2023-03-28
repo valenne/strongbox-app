@@ -23,11 +23,7 @@ function Input ({ string, value, placeholder, type = 'text', isTypeSelect }) {
             required
           >
             {questions.map((question, index) => (
-              <option
-                className='block text-ellipsis'
-                key={index}
-                value={question}
-              >
+              <option className='block' key={index} value={question}>
                 {question}
               </option>
             ))}

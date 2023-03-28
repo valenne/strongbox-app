@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { getUserPermission } from '../services/getUserPermission.js'
-
 import { HelperContext } from '../context/HelperContext.jsx'
 
 // import { useDataUser } from '../hooks/useDataUser.js'
@@ -49,32 +48,32 @@ function Dashboard () {
   }, [])
 
   return (
-    <section className='section-dashboard'>
-      <div className='dashboard-container dboard-wrapper'>
-        <picture className='image-container image'>
+    <section className='p-5'>
+      <div className='grid grid-cols-5 grid-rows-3 gap-5 grid-flow-row mt-32 border-2 border-red-100'>
+        <picture className='w-full h-full grid items-center p-3 col-start-1 col-span-1'>
           <img
-            className='profile-image image'
+            className='w-48 h-48 rounded-full object-cover mx-auto'
             src={`${informationRaw ? informationRaw.avatar : ''}`}
             alt='profile random image'
           />
         </picture>
-        <div className='user-information data'>
-          <div className='user-tag'>
-            <span style={{ display: 'block' }}>First Name:</span>
-            <p>{informationRaw.firstname}</p>
+        <div className='p-3 col-start-1 col-span-1 text-center'>
+          <div className='flex flex-col justify-center align-middle'>
+            <span className='block text-[14px] font-bold'>First Name:</span>
+            <p className='text-[18px] my-1'>{informationRaw.firstname}</p>
           </div>
 
-          <div className='user-tag'>
-            <span>Last Name:</span>
-            <p>{informationRaw.lastname}</p>
+          <div className='flex flex-col justify-center align-middle'>
+            <span className='block text-[14px] font-bold'>Last Name:</span>
+            <p className='text-[18px] my-1'>{informationRaw.lastname}</p>
           </div>
 
-          <div className='user-tag'>
-            <span>Email:</span>
-            <p>{informationRaw.email}</p>
+          <div className='flex flex-col justify-center align-middle'>
+            <span className='block text-[14px] font-bold'>Email:</span>
+            <p className='text-[18px] my-1'>{informationRaw.email}</p>
           </div>
         </div>
-        <div className='categories'>
+        <div className='col-start-1 row-start-3 col-span-1'>
           <ul>
             <li>categorie 1</li>
             <li>categorie 1</li>
@@ -85,7 +84,7 @@ function Dashboard () {
           </ul>
         </div>
 
-        <div className='data-container dashboard'>
+        <div className='col-start-2 row-start-1 col-span-full'>
           <div className='data-title-container'>
             <h2 className='data-title'>Information Keys</h2>
             <button className='data-new-button'>New Key</button>
