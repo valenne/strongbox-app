@@ -1,8 +1,8 @@
-import { User } from '../db/model/User.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { envConfig } from '../config/env.config.js'
 import { getDateRecord } from '../assets/js/getTimer.js'
+import { envConfig } from '../config/env.config.js'
+import { User } from '../db/model/User.js'
 
 export const loginController = {
   postLogin: async (req, res) => {

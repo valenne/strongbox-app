@@ -1,13 +1,13 @@
-import { getDateRecord } from '../assets/js/getTimer.js'
+import { Key } from '../db/model/Keys.js'
 import { User } from '../db/model/User.js'
 
 export const dashboardController = {
   getDashboard: async (req, res) => {
-    const { id } = req.params
+    const headers = req.headers
+    const user = await User.findOne({ _id: headers.id })
+    const userKeys = await Key.find({ user: headers.id })
 
-    const user = await User.findOne({ _id: id })
-
-    res.status(200).send({ user })
+    res.status(200).send({ user, userKeys })
   },
   postDashboard: (req, res) => {
     res.status(200).send({ status: 'success', msg: 'token validate' })

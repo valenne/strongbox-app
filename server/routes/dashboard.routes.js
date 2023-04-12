@@ -5,7 +5,7 @@ import { verifyToken } from '../middlewares/verifyToken.js'
 // instantiate Router
 const router = Router()
 
-router.get('/dashboard/user/:id', dashboardController.getDashboard)
+router.get('/dashboard', verifyToken, dashboardController.getDashboard)
 router.post('/dashboard', verifyToken, dashboardController.postDashboard)
 
 export { router as dashboardRouter }

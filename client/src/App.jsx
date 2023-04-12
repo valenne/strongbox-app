@@ -1,10 +1,10 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Header from './components/header/Header.jsx'
 import Login from './components/Login.jsx'
-
-import Dashboard from './components/Dashboard.jsx'
+import FormNewKey from './components/createKey/FormNewKey.jsx'
+import Dashboard from './components/dashboard/Dashboard.jsx'
+import Header from './components/header/Header.jsx'
 
 // importing components
 import Home from './components/Home.jsx'
@@ -14,12 +14,12 @@ function App () {
   return (
     <main>
       <Header />
-
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/create-key' element={<FormNewKey />} />
       </Routes>
     </main>
   )

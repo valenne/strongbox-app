@@ -1,9 +1,8 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 // import Input from './header/register/Input.jsx'
-import { loginUser } from '../services/loginUser.js'
-import { useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
-
+import { useNavigate } from 'react-router-dom'
+import { loginUser } from '../services/loginUser.js'
 // hook
 import { useCredential } from '../hooks/useDataLogin.js'
 import LoginInput from './login/LoginInput.jsx'
@@ -16,6 +15,7 @@ function Login () {
   const handleLogin = e => {
     e.preventDefault()
     const response = Object.fromEntries(new FormData(e.target))
+
     loginUser(response).then(res => {
       setResponseLogin(res)
       if (!res.data.error) {

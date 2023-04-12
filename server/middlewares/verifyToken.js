@@ -1,12 +1,15 @@
 import jwt from 'jsonwebtoken'
-import { envConfig } from '../config/env.config.js'
 import { getDateRecord } from '../assets/js/getTimer.js'
+import { envConfig } from '../config/env.config.js'
 import { User } from '../db/model/User.js'
 
 // middleware to validate token (rutas protegidas)
 export const verifyToken = async (req, res, next) => {
-  const { authentication } = req.headers
-  const { id } = req.body
+  const dataForHeaders = req.headers
+  const dataForBody = req.body
+  const id = dataForHeaders.id || dataForBody.id
+  const authentication =
+    dataForHeaders.authentication || dataForBody.authentication
 
   // the user exist on db? maybe not, we are prove
 
@@ -25,7 +28,7 @@ export const verifyToken = async (req, res, next) => {
     if (!decoded && err) console.log(`${getDateRecord()} - token expired`)
 
     if (err) {
-      return res.status(401).json({ error: 'token no es válido' })
+      return res.status(401).json({ error: 'token is not valid' })
     }
 
     req.user = decoded

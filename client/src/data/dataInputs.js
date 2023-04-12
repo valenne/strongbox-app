@@ -87,3 +87,56 @@ export const LoginDataInput = [
     regex: /password/
   }
 ]
+
+export const createKeyInput = [
+  {
+    labelName: 'Category',
+    labelFor: 'category',
+    inputId: 'category',
+    inputType: null,
+    inputName: 'category',
+    placeholder: 'mails, finance ...',
+    required: true,
+    regex: /category/
+  },
+  {
+    labelName: 'Service Name',
+    labelFor: 'serviceName',
+    inputId: 'serviceName',
+    inputType: 'text',
+    inputName: 'serviceName',
+    placeholder: 'spotify account...',
+    required: true,
+    regex: /serviceName/
+  },
+  {
+    labelName: 'Password',
+    labelFor: 'password',
+    inputId: 'password',
+    inputType: 'password',
+    inputName: 'password',
+    placeholder: '*****',
+    required: true,
+    regex: /password/
+  },
+  {
+    labelName: 'Description',
+    labelFor: 'description',
+    inputId: 'description',
+    inputType: 'text',
+    inputName: 'description',
+    placeholder: 'saving spotify data to remember later',
+    required: true,
+    regex: /description/
+  },
+  {
+    labelName: 'Pin (4 digits)',
+    labelFor: 'pin',
+    inputId: 'pin',
+    inputType: 'checkbox',
+    inputName: 'pin',
+    placeholder: 'spotify account...',
+    required: false,
+    regex: /pin/
+  }
+]

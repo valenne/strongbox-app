@@ -1,4 +1,8 @@
+export {
+  createKeyInput,
+  LoginDataInput,
+  registerDataInput
+} from './dataInputs.js'
 export { storageLogic } from './localStorageData.js'
-export { questions } from './recoveryQuestion.js'
 export { navbarPath } from './navbarPath.js'
-export { registerDataInput, LoginDataInput } from './dataInputs.js'
+export { questions } from './recoveryQuestion.js'

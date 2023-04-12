@@ -182,24 +182,3 @@ button[type='submit'] {
 	/* margin: 5px 0 5px 20px; */
 	margin: 5px 0 5px 0;
 }
-
-.data-title-container {
-	text-align: center;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	height: 100px;
-	gap: 10px;
-}
-
-.data-title {
-	font-size: 32px;
-	margin: 0;
-}
-
-.data-new-button {
-	margin-bottom: 30px;
-	font-size: 14px;
-	padding: 12px 24px;
-}

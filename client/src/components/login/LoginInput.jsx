@@ -10,12 +10,13 @@ function LoginInput ({ error }) {
             <label
               className='text-cyan-50 text-lg pt-2 pr-2 pb-2'
               htmlFor={row.labelFor}
+              id='labelLogin'
             >
               {row.labelName}
             </label>
 
             <input
-              className='text-cyan-50 font-semibold placeholder:text-[#b9dfee5b] p-2 caret-[#271F30] outline-none ring-2 ring-[#707F8F] focus:ring-cyan-400 rounded-md bg-[#271f306b]'
+              className='text-cyan-50 font-semibold placeholder:text-[#b9dfee5b] p-2 caret-cyan-400 outline-none ring-2 ring-[#707F8F] focus:ring-cyan-400 rounded-md bg-[#271f306b]'
               id={row.inputId}
               name={row.inputName}
               type={row.inputType}
