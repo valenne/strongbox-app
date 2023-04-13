@@ -1,11 +1,11 @@
 const pathImages = 'http://localhost:3000/assets'
 
 export const categoriesImg = {
-  education: `${pathImages}/education.jpg`,
-  finance: `${pathImages}/finance.jpg`,
   gaming: `${pathImages}/gaming.jpg`,
-  grocery: `${pathImages}/grocery.jpg`,
-  health: `${pathImages}/health.jpg`,
+  finance: `${pathImages}/finance.jpg`,
+  'grocery and food': `${pathImages}/grocery.jpg`,
   lifestyle: `${pathImages}/lifestyle.jpg`,
-  travel: `${pathImages}/travel.jpg`
+  education: `${pathImages}/education.jpg`,
+  travel: `${pathImages}/travel.jpg`,
+  'health and wellness': `${pathImages}/health.jpg`
 }

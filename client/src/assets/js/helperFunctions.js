@@ -15,3 +15,9 @@ export function userNotHavePermission (isAuthorized, pathname, navigate) {
   window.alert(`User authorized: ${isAuthorized} \nPath: ${pathname}`)
   return navigate('/login', { replace: true })
 }
+
+export function capitalize (str) {
+  const lower = str.toLowerCase()
+
+  return str.charAt(0).toUpperCase() + lower.slice(1)
+}
