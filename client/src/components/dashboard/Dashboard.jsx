@@ -1,3 +1,6 @@
+/* eslint-disable indent */
+/* eslint-disable react/jsx-indent */
+/* eslint-disable multiline-ternary */
 /* eslint-disable no-undef */
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -9,16 +12,18 @@ import { HelperContext } from '../../context/HelperContext.jsx'
 import { useAxios } from '../../hooks/useAxios.js'
 import CardKey from './CardKey.jsx'
 
+// icon
+
 // component
 function Dashboard () {
-  const [userData, setUserData] = useState({})
-  const [userKeys, setUserKeys] = useState([])
-  const navigate = useNavigate()
   const { setInDashboard, pathname } = useContext(HelperContext)
-  const { axiosUserPermission, error, isAuthorized } = useAxios(
-    pathname,
-    navigate
-  )
+  const [preDataDashboard, setPreDataDashboard] = useState({})
+  const [selectedCard, setSelectedCard] = useState(null)
+
+  const navigate = useNavigate()
+  // custom hook
+  const { axiosUserPermission, error, isAuthorized, axiosCardData } =
+    useAxios(pathname)
 
   useEffect(() => {
     const userPermission = async () => {
@@ -32,14 +37,13 @@ function Dashboard () {
           setInDashboard(true)
           // user information side panel
 
-          const user = {
-            firstname: res.user.firstName,
-            lastname: res.user.lastName,
-            email: res.user.email,
-            avatar: res.user.avatarImage
-          }
-          setUserKeys(res.userKeys)
-          setUserData(user)
+          // const user = {
+          //   firstname: res.user.firstName,
+          //   lastname: res.user.lastName,
+          //   email: res.user.email,
+          //   avatar: res.user.avatarImage
+          // }
+          setPreDataDashboard(res)
         } catch (err) {
           console.log(err)
           userNotHavePermission(isAuthorized, pathname, navigate)
@@ -50,13 +54,7 @@ function Dashboard () {
     }
 
     userPermission()
-  }, [setUserKeys])
-
-  const getCardId = e => {
-    console.log(e.currentTarget.getAttribute('data-id'))
-  }
-
-  // userKeys && userKeys.map(collection => console.log(collection.categoryImg))
+  }, [])
 
   return (
     <section id='dashboard' className='p-5'>
@@ -64,7 +62,11 @@ function Dashboard () {
         <picture className='w-full min-h-fit grid items-center p-3 col-start-1 col-span-1'>
           <img
             className='w-48 h-48 rounded-full object-cover mx-auto'
-            src={`${userData ? userData.avatar : ''}`}
+            src={`${
+              preDataDashboard.user?.avatarImage
+                ? preDataDashboard.user?.avatarImage
+                : ''
+            }`}
             alt='profile random image'
           />
         </picture>
@@ -74,27 +76,31 @@ function Dashboard () {
               First Name:
             </h3>
             <p className='text-lg my-1 text-gray-400'>
-              {userData.firstname && capitalize(userData.firstname)}
+              {preDataDashboard.user?.firstname &&
+                capitalize(preDataDashboard.user?.firstname)}
             </p>
           </div>
 
           <div className='flex flex-col justify-center align-middle'>
             <h3 className='block text-lg font-bold text-cyan-50'>Last Name:</h3>
             <p className='text-lg my-1 text-gray-400'>
-              {userData.lastname && capitalize(userData.lastname)}
+              {preDataDashboard.user?.lastname &&
+                capitalize(preDataDashboard.user?.lastname)}
             </p>
           </div>
 
           <div className='flex flex-col justify-center align-middle mb-8'>
             <h3 className='block text-lg font-bold text-cyan-50'>Email:</h3>
-            <p className='text-lg my-1 text-gray-400'>{userData.email}</p>
+            <p className='text-lg my-1 text-gray-400'>
+              {preDataDashboard.user?.email}
+            </p>
           </div>
           <span className='block w-[90%] border-[1px] border-[#3F3F50] mx-auto px-3' />
           <div className='min-h-fit col-start-1 row-start-3 col-span-1 mt-8'>
             <h3 className='block text-lg font-bold text-cyan-50'>Categories</h3>
             <ul className='grid grid-cols-1 gap-2'>
-              {userKeys &&
-                userKeys.map((collection, key) => (
+              {preDataDashboard.userKeys &&
+                preDataDashboard.userKeys.map((collection, key) => (
                   <li className='text-gray-400' key={key}>
                     {capitalize(collection.category)}
                   </li>
@@ -118,21 +124,24 @@ function Dashboard () {
             <span className='block w-full border-[1px] border-[#3F3F50] mx-auto mb-5' />
           </div>
         </div>
-        <div className='w-full min-h-fit col-start-2 row-start-2 mt-10 col-span-full'>
+        <div className='w-full min-h-fit col-start-2 row-start-2 mt-10 col-span-full relative '>
           <div className='w-full h-full flex flex-row flex-wrap gap-6 p-10 mx-auto justify-evenly'>
-            {userKeys &&
-              userKeys.map((collection, key) => (
-                <div
-                  id='card'
-                  key={key}
-                  className='relative border-[1px] border-[#3F3F50] w-max rounded-md overflow-hidden drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] hover:scale-[1.01] ease-in-out duration-300 group'
-                  onClick={getCardId}
-                  data-id={collection._id}
-                >
+            {preDataDashboard.userKeys &&
+              preDataDashboard.userKeys.map((collection, key) => (
+                <div className='card' key={collection._id}>
                   <CardKey
                     src={collection.categoryImg}
                     alt={`contiene imagen con tematica ${collection.category}`}
                     data={collection}
+                    onClick={() => setSelectedCard(collection._id)}
+                    isSelected={collection._id === selectedCard}
+                    pin={
+                      collection._id === selectedCard && {
+                        hasPin: collection.hasPin,
+                        id: collection._id
+                      }
+                    }
+                    axiosCard={axiosCardData}
                   />
                 </div>
               ))}

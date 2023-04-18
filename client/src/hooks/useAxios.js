@@ -41,11 +41,33 @@ export function useAxios (pathname) {
     }
   }, [])
 
+  const axiosCardData = useCallback(async cardId => {
+    setLoading(true)
+
+    try {
+      const response = await axios.get('http://localhost:3000/data-card', {
+        headers: {
+          id: cardId
+        }
+      })
+      const data = await response.data
+      console.log(data)
+      setError(null)
+      return data
+    } catch (err) {
+      console.log(err.message)
+      setError(err)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
   return {
     axiosUserPermission,
     loading,
     error,
     isAuthorized,
-    id
+    id,
+    axiosCardData
   }
 }
