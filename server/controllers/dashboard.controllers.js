@@ -13,6 +13,7 @@ export const dashboardController = {
       const responseUser = {
         firstname: user.firstName,
         lastname: user.lastName,
+        username: user.username,
         email: user.email,
         avatarImage: user.avatarImage
       }
@@ -41,7 +42,8 @@ export const dashboardController = {
     res.status(200).send({ status: 'success', msg: 'token validate' })
   },
   getDataCard: async (req, res) => {
-    const { id } = req.headers
+    const { id, pin } = req.headers
+
     try {
       const information = await Key.findOne({ _id: id })
 
@@ -51,13 +53,19 @@ export const dashboardController = {
         serviceName: information.serviceName,
         savePassword: information.savePassword,
         description: information.description,
-        'create at': information.createAt,
-        'update at': information.updateAt,
-        hasPin: information.hasPin
+        createAt: information.createAt,
+        updateAt: information.updateAt
       }
 
       if (!information.hasPin) {
-        res.status(200).send(responseKey)
+        return res.status(200).send(responseKey)
+      }
+
+      if (pin) {
+        console.log({ be: information.pin, ff: pin })
+        return information.pin === pin
+          ? res.send(responseKey)
+          : res.send({ error: 'Failure to match data' })
       }
     } catch (err) {
       console.log(`${getDateRecord()} - ${err.message}`)

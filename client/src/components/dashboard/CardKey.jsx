@@ -1,17 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BsFillUnlockFill } from 'react-icons/bs'
 import { capitalize } from '../../assets/js/helperFunctions'
 
-function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCard }) {
+function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCardData }) {
+  const [dataPostVerification, setDataPostVerification] = useState({})
+  const [error, setError] = useState('')
+  const [scForm, setScForm] = useState(true)
   const getCardInfo = e => {
     e.preventDefault()
 
-    if (e.type === 'submit') {
-      const cardPin = Object.fromEntries(new FormData(e.target))
-      console.log(cardPin)
-    } else if (e.type === 'click') {
-      console.log('Clickeeed', pin.id)
+    const cardForm = Object.fromEntries(new FormData(e.target))
+    const { id } = pin
+
+    if (Object.keys(cardForm).length === 0) {
+      return axiosCardData(id)
+        .then(result => {
+          setDataPostVerification(result)
+          setScForm(false)
+        })
+        .catch(err => console.log(err))
+        .finally(() => {
+          console.log('end of process')
+        })
     }
+
+    const { data } = cardForm
+
+    return axiosCardData(id, data)
+      .then(result => {
+        if (result.error) {
+          setError('Wrong Pin')
+
+          setTimeout(() => {
+            setError('')
+          }, 1000)
+          return
+        }
+        setDataPostVerification(result)
+        setScForm(false)
+      })
+      .catch(err => console.log(err))
+      .finally(() => console.log('end of process'))
   }
 
   return (
@@ -35,36 +64,58 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCard }) {
           
         `}
       >
-        <div className='mt-6 blur-sm'>
+        <div className={`mt-6 ${scForm ? 'blur-sm' : ''}`}>
           <div className='flex flex-row gap-3'>
             <h3 className='text-cyan-50 font-bold'>Category:</h3>
             <p className='text-gray-400'>
-              {data.category && capitalize(data.category)}
+              {Object.keys(dataPostVerification).length !== 0
+                ? dataPostVerification.category
+                : data.category && capitalize(data.category)}
             </p>
           </div>
           <div className='flex flex-row gap-3'>
             <h3 className='text-cyan-50 font-bold'>Service Name:</h3>
             <p className='text-gray-400'>
-              {data.serviceName && capitalize(data.serviceName)}
+              {Object.keys(dataPostVerification).length !== 0
+                ? dataPostVerification.serviceName
+                : data.serviceName && capitalize(data.serviceName)}
             </p>
           </div>
           <div className='flex flex-row gap-3'>
             <h3 className='text-cyan-50 font-bold'>Description:</h3>
-            <p className='text-gray-400'>{data.description}</p>
+            <p className='text-gray-400'>
+              {Object.keys(dataPostVerification).length !== 0
+                ? dataPostVerification.description
+                : data.description}
+            </p>
           </div>
           <div className='flex flex-row gap-3'>
             <h3 className='text-cyan-50 font-bold'>Password:</h3>
-            <p className='text-gray-400'>{data.password}</p>
+            <p className='text-gray-400'>
+              {Object.keys(dataPostVerification).length !== 0
+                ? dataPostVerification.savePassword
+                : data.password}
+            </p>
           </div>
           <div className='flex flex-row gap-3'>
             <h3 className='text-cyan-50 font-bold'>Created at:</h3>
-            <p className='text-gray-400'>{data.createAt}</p>
+            <p className='text-gray-400'>
+              {Object.keys(dataPostVerification).length !== 0
+                ? dataPostVerification.createAt
+                : data.createAt}
+            </p>
           </div>
         </div>
       </div>
 
       {/* service name in absolute way like liston */}
-      <div className=' flex flex-col absolute px-2 py-3 top-[125px] w-[350px] h-[250px] translate-x-0 translate-y-1/2 text-center bg-[#271f3091] border-[1px] border-[#3F3F50]'>
+      <div
+        onClick={() => {
+          setScForm(true)
+          setDataPostVerification({})
+        }}
+        className=' flex flex-col absolute px-2 py-3 top-[125px] w-[350px] h-[250px] translate-x-0 translate-y-1/2 text-center bg-[#271f3091] border-[1px] border-[#3F3F50]'
+      >
         {/* have pin */}
         <form
           id='formPin'
@@ -73,7 +124,7 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCard }) {
         >
           <div
             className={`grid grid-cols-2 gap-2 items-center p-2 ${
-              isSelected & pin.hasPin ? '' : 'hidden'
+              isSelected & scForm & pin.hasPin ? '' : 'hidden'
             }`}
           >
             <div className='flex flex-row gap-2'>
@@ -83,16 +134,26 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCard }) {
               >
                 Pin
               </label>
-              <input
-                id={data._id}
-                className='text-cyan-50 font-semibold placeholder:text-[#b9dfee5b] p-2 caret-cyan-400 outline-none ring-2 ring-[#707F8F] focus:ring-cyan-400 rounded-md bg-[#271f306b]'
-                type='password'
-                name={data._id}
-                placeholder='****'
-                maxLength={4}
-              />
+              <div>
+                <input
+                  id={data._id}
+                  className='text-cyan-50 font-semibold placeholder:text-[#b9dfee5b] p-2 caret-cyan-400 outline-none ring-2 ring-[#707F8F] focus:ring-cyan-400 rounded-md bg-[#271f306b]'
+                  type='password'
+                  name='data'
+                  placeholder='****'
+                  maxLength={4}
+                  required
+                />
+                <p
+                  className={`flex items-center justify-center mx-auto text-sm opacity-0 mt-2 w-full h-3 duration-300  ${
+                    error ? 'text-red-600 opacity-100 duration-300 ' : ''
+                  }`}
+                >
+                  {error && error}
+                </p>
+              </div>
             </div>
-            <button className='absolute translate-x-24 translate-y-14 min-w-fit row-start-2 py-2 px-6 bg-purple-900 hover:bg-black duration-300 text-cyan-50 rounded-lg drop-shadow-lg'>
+            <button className='absolute translate-x-24 mt-4 translate-y-14 min-w-fit row-start-2 py-2 px-6 bg-purple-900 hover:bg-black duration-300 text-cyan-50 rounded-lg drop-shadow-lg'>
               Check
             </button>
           </div>
@@ -101,21 +162,24 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCard }) {
         {/* haven't pin */}
         <div
           className={`absolute top-10 left-16 translate-x-1/2 translate-y-1/2 duration-300 ${
-            isSelected & !pin.hasPin ? '' : 'hidden'
+            isSelected & scForm & !pin.hasPin ? '' : 'hidden'
           }`}
         >
-          <div className='grid gap-2 grid-cols-1'>
-            <div className='flex flex-row gap-2 justify-center items-center'>
+          <form
+            onSubmit={e => getCardInfo(e)}
+            className='grid gap-2 grid-cols-1'
+          >
+            <label className='flex flex-row gap-2 justify-center items-center'>
               <p>Without pin</p>
               <BsFillUnlockFill />
-            </div>
+            </label>
             <button
-              onClick={e => getCardInfo(e)}
+              // onClick={e => getCardInfo(e)}
               className=' inline-block min-w-fit row-start-2 py-2 px-6 bg-purple-900 hover:bg-black duration-300 text-cyan-50 rounded-lg drop-shadow-lg font-bold'
             >
               Open
             </button>
-          </div>
+          </form>
         </div>
         <p className='absolute top-4 left-1/2 -translate-x-1/2 font-bold text-base underline'>
           {data.serviceName && capitalize(data.serviceName)}

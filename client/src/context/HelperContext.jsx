@@ -9,6 +9,8 @@ export function HelperContextProvider ({ children }) {
   const [inDashboard, setInDashboard] = useState(false)
   // set the check on the key form submit
   const [inputCheck, setInputCheck] = useState(false)
+  // save username
+  const [userName, setUserName] = useState('')
 
   return (
     <HelperContext.Provider
@@ -17,7 +19,9 @@ export function HelperContextProvider ({ children }) {
         inDashboard,
         pathname,
         inputCheck,
-        setInputCheck
+        setInputCheck,
+        userName,
+        setUserName
       }}
     >
       {children}

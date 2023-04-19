@@ -16,8 +16,8 @@ import CardKey from './CardKey.jsx'
 
 // component
 function Dashboard () {
-  const { setInDashboard, pathname } = useContext(HelperContext)
   const [preDataDashboard, setPreDataDashboard] = useState({})
+  const { setInDashboard, pathname } = useContext(HelperContext)
   const [selectedCard, setSelectedCard] = useState(null)
 
   const navigate = useNavigate()
@@ -35,20 +35,12 @@ function Dashboard () {
             return
           }
           setInDashboard(true)
-          // user information side panel
-
-          // const user = {
-          //   firstname: res.user.firstName,
-          //   lastname: res.user.lastName,
-          //   email: res.user.email,
-          //   avatar: res.user.avatarImage
-          // }
           setPreDataDashboard(res)
         } catch (err) {
           console.log(err)
           userNotHavePermission(isAuthorized, pathname, navigate)
         }
-      } else {
+      } else if (error) {
         userNotHavePermission(isAuthorized, pathname, navigate)
       }
     }
@@ -97,7 +89,9 @@ function Dashboard () {
           </div>
           <span className='block w-[90%] border-[1px] border-[#3F3F50] mx-auto px-3' />
           <div className='min-h-fit col-start-1 row-start-3 col-span-1 mt-8'>
-            <h3 className='block text-lg font-bold text-cyan-50'>Categories</h3>
+            <h3 className='block text-lg font-bold text-cyan-50 mb-4'>
+              Categories
+            </h3>
             <ul className='grid grid-cols-1 gap-2'>
               {preDataDashboard.userKeys &&
                 preDataDashboard.userKeys.map((collection, key) => (
@@ -141,7 +135,7 @@ function Dashboard () {
                         id: collection._id
                       }
                     }
-                    axiosCard={axiosCardData}
+                    axiosCardData={axiosCardData}
                   />
                 </div>
               ))}

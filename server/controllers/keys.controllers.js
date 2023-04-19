@@ -1,11 +1,14 @@
 import { getDateRecord } from '../assets/js/getTimer.js'
 import { categoriesImg } from '../data/dataCategoriesImages.js'
 import { Key } from '../db/model/Keys.js'
+import { User } from '../db/model/User.js'
 
 export const keysController = {
   getKey: async (req, res) => {
     console.log(`${getDateRecord()} - GET.keys.controller`)
-    res.status(200).send('key.controller good')
+    const headers = req.headers
+    const user = await User.findOne({ _id: headers.id })
+    res.status(200).send({ user })
   },
   postKey: async (req, res) => {
     console.log(`${getDateRecord()} - POST.keys.controller`)
