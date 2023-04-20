@@ -3,7 +3,7 @@ import axios from 'axios'
 export async function registerUser (formData) {
   try {
     const response = await axios.post(
-      'http://localhost:3000/register-user',
+      'http://localhost:3000/register',
       formData
     )
 

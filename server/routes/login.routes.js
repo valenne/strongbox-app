@@ -6,6 +6,6 @@ import { loginController } from '../controllers/login.controllers.js'
 // instantiate Router
 const router = Router()
 
-router.post('/login-user', loginController.postLogin)
+router.post('/login', loginController.postLogin)
 
 export { router as loginRouter }

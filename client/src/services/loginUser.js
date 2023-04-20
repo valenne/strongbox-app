@@ -3,10 +3,7 @@ import axios from 'axios'
 
 export async function loginUser (loginData) {
   try {
-    const response = await axios.post(
-      'http://localhost:3000/login-user',
-      loginData
-    )
+    const response = await axios.post('http://localhost:3000/login', loginData)
 
     if (response.data.token) {
       localStorage.setItem('user', JSON.stringify(response.data))

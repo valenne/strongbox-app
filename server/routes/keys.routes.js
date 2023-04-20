@@ -4,7 +4,7 @@ import { verifyToken } from '../middlewares/verifyToken.js'
 
 const router = Router()
 
-router.get('/create-key', verifyToken, keysController.getKey)
-router.post('/create-key', keysController.postKey)
+router.get('/card', verifyToken, keysController.getKey)
+router.post('/card', keysController.postKey)
 
 export { router as keysRouter }

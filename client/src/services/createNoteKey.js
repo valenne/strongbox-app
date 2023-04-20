@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export async function createNewKey (id, formData) {
   try {
-    const response = await axios.post('http://localhost:3000/create-key', {
+    const response = await axios.post('http://localhost:3000/card', {
       id,
       formData
     })

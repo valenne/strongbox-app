@@ -1,7 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable react/jsx-indent */
-/* eslint-disable multiline-ternary */
-/* eslint-disable no-undef */
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -108,7 +104,7 @@ function Dashboard () {
             <h2 className='self-center text-4xl font-semibold text-cyan-50 m-0 mb-3'>
               Information Keys
             </h2>
-            <a href='/create-key'>
+            <a href='/card'>
               <button className='h-fit self-center bg-purple-900 rounded-md hover:bg-black hover:text-cyan-50 text-cyan-50 text-md py-3 px-5 ease-out duration-300 font-bold'>
                 New Key
               </button>
@@ -118,8 +114,21 @@ function Dashboard () {
             <span className='block w-full border-[1px] border-[#3F3F50] mx-auto mb-5' />
           </div>
         </div>
+
         <div className='w-full min-h-fit col-start-2 row-start-2 mt-10 col-span-full relative '>
-          <div className='w-full h-full flex flex-row flex-wrap gap-6 p-10 mx-auto justify-evenly'>
+          {/* buttons */}
+          <div className='h-fit flex flex-row justify-center gap-4 mx-auto col-start-2 row-start-2 row-end-2 mt-2 mb-4'>
+            <button className=' bg-purple-900 rounded-md hover:bg-black  text-cyan-50 text-md py-3 px-5 ease-out duration-300 font-bold'>
+              Orden A-Z
+            </button>
+            <button className=' bg-purple-900 rounded-md hover:bg-black  text-cyan-50 text-md py-3 px-5 ease-out duration-300 font-bold'>
+              Orden Z-A
+            </button>
+            <button className=' bg-purple-900 rounded-md hover:bg-black  text-cyan-50 text-md py-3 px-5 ease-out duration-300 font-bold'>
+              Orden by Date
+            </button>
+          </div>
+          <div className='w-full h-full flex flex-row flex-wrap gap-6 px-20 py-10 justify-around'>
             {preDataDashboard.userKeys &&
               preDataDashboard.userKeys.map((collection, key) => (
                 <div className='card' key={collection._id}>

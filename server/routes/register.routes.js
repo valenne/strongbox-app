@@ -5,6 +5,6 @@ import { registerController } from '../controllers/register.controllers.js'
 // instantiate router
 const router = Router()
 
-router.post('/register-user', registerController.postRegister)
+router.post('/register', registerController.postRegister)
 
 export { router as registerRouter }

@@ -41,16 +41,19 @@ export function useAxios (pathname) {
     }
   }, [])
 
-  const axiosCardData = useCallback(async (cardId, pin) => {
+  const axiosCardData = useCallback(async (cardId, pin, path) => {
     setLoading(true)
-
+    console.log(path)
     try {
-      const response = await axios.get('http://localhost:3000/data-card', {
-        headers: {
-          id: cardId,
-          pin
+      const response = await axios.get(
+        `http://localhost:3000/${pathname.slice(1)}/${path}`,
+        {
+          headers: {
+            id: cardId,
+            pin
+          }
         }
-      })
+      )
       const data = await response.data
       // console.log(data)
       setError(null)
