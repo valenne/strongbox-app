@@ -5,7 +5,6 @@ import { User } from '../db/model/User.js'
 export const dashboardController = {
   getDashboard: async (req, res) => {
     const headers = req.headers
-
     try {
       const user = await User.findOne({ _id: headers.id })
       const userKeys = await Key.find({ user: headers.id })
@@ -32,7 +31,7 @@ export const dashboardController = {
           updateAt: 'secret update date'
         }
       })
-
+      console.log('test 2x')
       res.status(200).send({ user: responseUser, userKeys: responseKeys })
     } catch (err) {
       console.log(`${getDateRecord()} - ${err.message}`)

@@ -8,8 +8,6 @@ import { HelperContext } from '../../context/HelperContext.jsx'
 import { useAxios } from '../../hooks/useAxios.js'
 import CardKey from './CardKey.jsx'
 
-// icon
-
 // component
 function Dashboard () {
   const [preDataDashboard, setPreDataDashboard] = useState({})
@@ -30,6 +28,7 @@ function Dashboard () {
           if (Object.keys(res).length === 0) {
             return
           }
+
           setInDashboard(true)
           setPreDataDashboard(res)
         } catch (err) {
@@ -59,33 +58,37 @@ function Dashboard () {
           />
         </picture>
         <div className='min-h-fit p-3 col-start-1 col-span-1 text-center'>
-          <div className='flex flex-col justify-center align-middle'>
-            <h3 className='block text-lg font-bold text-cyan-50'>
+          <div className='flex flex-col justify-center align-middle '>
+            <h3 className='block  font-bold text-cyan-50 max-sm:text-sm md:text-base'>
               First Name:
             </h3>
-            <p className='text-lg my-1 text-gray-400'>
+            <p className='text-lg my-1 text-gray-400 max-sm:text-sm sm:text-base md:text-lg'>
               {preDataDashboard.user?.firstname &&
                 capitalize(preDataDashboard.user?.firstname)}
             </p>
           </div>
 
           <div className='flex flex-col justify-center align-middle'>
-            <h3 className='block text-lg font-bold text-cyan-50'>Last Name:</h3>
-            <p className='text-lg my-1 text-gray-400'>
+            <h3 className='block text-lg font-bold text-cyan-50 max-sm:text-sm md:text-base'>
+              Last Name:
+            </h3>
+            <p className='text-lg my-1 text-gray-400 max-sm:text-sm sm:text-base md:text-lg'>
               {preDataDashboard.user?.lastname &&
                 capitalize(preDataDashboard.user?.lastname)}
             </p>
           </div>
 
           <div className='flex flex-col justify-center align-middle mb-8'>
-            <h3 className='block text-lg font-bold text-cyan-50'>Email:</h3>
-            <p className='text-lg my-1 text-gray-400'>
+            <h3 className='block text-lg font-bold text-cyan-50 max-sm:text-sm sm:text-base md:text-base'>
+              Email:
+            </h3>
+            <p className='text-lg my-1 text-gray-400 max-sm:text-sm sm:text-base md:text-lg'>
               {preDataDashboard.user?.email}
             </p>
           </div>
           <span className='block w-[90%] border-[1px] border-[#3F3F50] mx-auto px-3' />
           <div className='min-h-fit col-start-1 row-start-3 col-span-1 mt-8'>
-            <h3 className='block text-lg font-bold text-cyan-50 mb-4'>
+            <h3 className='block text-lg font-bold text-cyan-50 mb-4 max-sm:text-sm sm:text-base md:text-lg'>
               Categories
             </h3>
             <ul className='grid grid-cols-1 gap-2'>
@@ -118,19 +121,19 @@ function Dashboard () {
         <div className='w-full min-h-fit col-start-2 row-start-2 mt-10 col-span-full relative '>
           {/* buttons */}
           <div className='h-fit flex flex-row justify-center gap-4 mx-auto col-start-2 row-start-2 row-end-2 mt-2 mb-4'>
-            <button className=' bg-purple-900 rounded-md hover:bg-black  text-cyan-50 text-md py-3 px-5 ease-out duration-300 font-bold'>
+            <button className=' bg-purple-900 rounded-md hover:bg-cyan-50 hover:text-black text-cyan-50 text-sm py-2 px-3 ease-out duration-300 font-bold'>
               Orden A-Z
             </button>
-            <button className=' bg-purple-900 rounded-md hover:bg-black  text-cyan-50 text-md py-3 px-5 ease-out duration-300 font-bold'>
+            <button className=' bg-purple-900 rounded-md hover:bg-cyan-50 hover:text-black text-cyan-50 text-sm py-2 px-3 ease-out duration-300 font-bold'>
               Orden Z-A
             </button>
-            <button className=' bg-purple-900 rounded-md hover:bg-black  text-cyan-50 text-md py-3 px-5 ease-out duration-300 font-bold'>
+            <button className=' bg-purple-900 rounded-md hover:bg-cyan-50 hover:text-black text-cyan-50 text-sm py-2 px-3 ease-out duration-300 font-bold'>
               Orden by Date
             </button>
           </div>
-          <div className='w-full h-full flex flex-row flex-wrap gap-6 px-20 py-10 justify-around'>
+          <div className='w-full h-full flex flex-row flex-wrap gap-6 px-20 py-10 justify-evenly md:max-xl:justify-center'>
             {preDataDashboard.userKeys &&
-              preDataDashboard.userKeys.map((collection, key) => (
+              preDataDashboard.userKeys.map(collection => (
                 <div className='card' key={collection._id}>
                   <CardKey
                     src={collection.categoryImg}
