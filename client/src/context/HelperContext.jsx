@@ -11,6 +11,8 @@ export function HelperContextProvider ({ children }) {
   const [inputCheck, setInputCheck] = useState(false)
   // save username
   const [userName, setUserName] = useState('')
+  // set value when card is delete or update
+  const [isCardChange, setIsCardChange] = useState({ status: false, verb: '' })
 
   return (
     <HelperContext.Provider
@@ -21,7 +23,9 @@ export function HelperContextProvider ({ children }) {
         inputCheck,
         setInputCheck,
         userName,
-        setUserName
+        setUserName,
+        setIsCardChange,
+        isCardChange
       }}
     >
       {children}

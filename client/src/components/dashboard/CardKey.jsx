@@ -115,6 +115,14 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCardData }) {
                   : data.createAt}
               </p>
             </div>
+            <div className='flex flex-row gap-3'>
+              <h3 className='text-cyan-50 font-bold text-sm'>Update at:</h3>
+              <p className='block text-gray-400 text-base whitespace-nowrap overflow-hidden truncate'>
+                {Object.keys(dataPostVerification).length !== 0
+                  ? dataPostVerification.updateAt
+                  : data.updateAt}
+              </p>
+            </div>
           </div>
         </div>
 

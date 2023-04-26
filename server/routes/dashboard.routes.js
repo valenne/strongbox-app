@@ -6,7 +6,6 @@ import { verifyToken } from '../middlewares/verifyToken.js'
 const router = Router()
 
 router.get('/dashboard', verifyToken, dashboardController.getDashboard)
-// router.post('/dashboard', verifyToken, dashboardController.postDashboard)
 router.get('/dashboard/cards', dashboardController.getDataCard)
 
 export { router as dashboardRouter }

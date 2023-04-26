@@ -1,10 +1,12 @@
 import axios from 'axios'
 
-export async function createNewKey (id, formData) {
+export async function axiosKeyHandle (id, formData, verb) {
   try {
-    const response = await axios.post('http://localhost:3000/card', {
-      id,
-      formData
+    const response = await axios[verb]('http://localhost:3000/card', {
+      headers: {
+        id,
+        formData
+      }
     })
 
     return response.data

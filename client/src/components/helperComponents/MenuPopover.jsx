@@ -1,11 +1,17 @@
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { SlOptionsVertical } from 'react-icons/sl'
+import { useNavigate } from 'react-router-dom'
+import { HelperContext } from '../../context/HelperContext.jsx'
+import { axiosKeyHandle } from '../../services/createNoteKey.js'
 
 export function MenuPopover ({ elementId }) {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
+  // handle card changed
+  const navigate = useNavigate()
+  const { setIsCardChange } = useContext(HelperContext)
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget)
@@ -13,14 +19,28 @@ export function MenuPopover ({ elementId }) {
 
   // capture id, then try to update and delete
   const handleClose = event => {
-    const captureIdCard = event.target.getAttribute('data-elementId')
+    // const captureIdCard = event.target.getAttribute('data-elementid')
+    const textContentCard = event.target.textContent
 
-    console.log(captureIdCard)
+    if (textContentCard === 'Update') {
+      setIsCardChange({ status: true, verb: 'put' })
+      return navigate('/card', { replace: true })
+    } else if (textContentCard === 'Delete') {
+      setIsCardChange({ status: true, verb: 'delete' })
+      axiosKeyHandle(elementId, undefined, 'delete')
+        .then(data => {
+          console.log(data)
+          navigate('/dashboard', { replace: false })
+        })
+        .catch(e => e.message)
+      return navigate('/card', { replace: true })
+    }
+
     setAnchorEl(null)
   }
 
   return (
-    <div className='min-h-fit text-xl z-20 row-start-1 col-start-1 my-2 mx-4 p-2'>
+    <div className='min-h-min min-w-min text-xl z-20 row-start-1 col-start-1 my-2 mx-4 p-2'>
       <SlOptionsVertical
         id='demo-positioned-button'
         aria-controls={open ? 'demo-positioned-menu' : undefined}
@@ -44,14 +64,14 @@ export function MenuPopover ({ elementId }) {
           horizontal: 'left'
         }}
       >
-        <MenuItem data-elementId={elementId} onClick={handleClose}>
-          Profile
+        <MenuItem data-elementid={elementId} onClick={handleClose}>
+          Update
         </MenuItem>
-        <MenuItem data-elementId={elementId} onClick={handleClose}>
-          My account
+        <MenuItem data-elementid={elementId} onClick={handleClose}>
+          Delete
         </MenuItem>
-        <MenuItem data-elementId={elementId} onClick={handleClose}>
-          Logout
+        <MenuItem data-elementid={elementId} onClick={handleClose}>
+          Close
         </MenuItem>
       </Menu>
     </div>

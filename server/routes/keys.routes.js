@@ -6,5 +6,7 @@ const router = Router()
 
 router.get('/card', verifyToken, keysController.getKey)
 router.post('/card', keysController.postKey)
+router.put('/card', keysController.putKey)
+router.delete('/card', keysController.deleteKey)
 
 export { router as keysRouter }
