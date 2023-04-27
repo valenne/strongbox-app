@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { HelperContext } from '../../context/HelperContext.jsx'
 import { useAxios } from '../../hooks/useAxios.js'
-import { axiosKeyHandle } from '../../services/createNoteKey.js'
+import { axiosKeyHandle } from '../../services/axiosHandle.js'
 import {
   userNotHavePermission,
   validatPinData
@@ -28,7 +28,7 @@ function FormNewKey () {
           setInDashboard(true)
           return
         } catch (err) {
-          console.log(err)
+          console.log(err.message)
           setInDashboard(false)
           userNotHavePermission(isAuthorized, pathname, navigate)
         }
@@ -40,7 +40,7 @@ function FormNewKey () {
 
     // create data
     if (dataNewKey && !isCardChange.status) {
-      axiosKeyHandle(id, dataNewKey, 'post')
+      axiosKeyHandle(id, dataNewKey, 'post', 'card')
         .then(data => {
           console.log(data)
           navigate('/dashboard', { replace: true })
@@ -51,7 +51,7 @@ function FormNewKey () {
       isCardChange.status &&
       isCardChange.verb === 'put'
     ) {
-      axiosKeyHandle(id, dataNewKey, 'put')
+      axiosKeyHandle(id, dataNewKey, 'put', 'card')
         .then(data => {
           console.log(data)
           navigate('/dashboard', { replace: true })
@@ -85,7 +85,7 @@ function FormNewKey () {
         {/* <Toaster position='top-center' reverseOrder={false} /> */}
         <div className='w-fit mt-32 mx-auto'>
           <h2 className='text-cyan-50 text-2xl p-5 text-center mt-10 mb-5'>
-            {!isCardChange ? 'Create a Key' : 'Update a Key'}
+            {!isCardChange.status ? 'Create a Key' : 'Update a Key'}
           </h2>
           <form
             onSubmit={handleLogin}
@@ -99,7 +99,7 @@ function FormNewKey () {
                   className='w-full py-3 px-5 bg-[#271F30] hover:bg-black duration-300 text-cyan-50 rounded-lg drop-shadow-lg'
                   type='submit'
                 >
-                  {!isCardChange ? 'Create' : 'Update'}
+                  {!isCardChange.status ? 'Create' : 'Update'}
                 </button>
               </div>
             </div>

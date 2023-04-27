@@ -19,8 +19,8 @@ export function useAxios (pathname) {
   const axiosUserPermission = useCallback(async () => {
     setLoading(true)
 
-    // console.log(pathname)
     try {
+      // throw new Error('test error axiosUserPermission')
       const response = await axios.get(
         `http://localhost:3000/${pathname.slice(1)}`,
         {
@@ -43,7 +43,6 @@ export function useAxios (pathname) {
 
   const axiosCardData = useCallback(async (cardId, pin, path) => {
     setLoading(true)
-    console.log(path)
     try {
       const response = await axios.get(
         `http://localhost:3000/${pathname.slice(1)}/${path}`,
@@ -55,7 +54,6 @@ export function useAxios (pathname) {
         }
       )
       const data = await response.data
-      // console.log(data)
       setError(null)
       return data
     } catch (err) {
@@ -70,7 +68,7 @@ export function useAxios (pathname) {
     axiosUserPermission,
     loading,
     error,
-    isAuthorized,
+    isAuthorized: error ? false : true,
     id,
     axiosCardData
   }

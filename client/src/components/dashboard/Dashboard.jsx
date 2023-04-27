@@ -16,8 +16,7 @@ function Dashboard () {
 
   const navigate = useNavigate()
   // custom hook
-  const { axiosUserPermission, error, isAuthorized, axiosCardData } =
-    useAxios(pathname)
+  const { axiosUserPermission, error, isAuthorized } = useAxios(pathname)
 
   useEffect(() => {
     const userPermission = async () => {
@@ -32,11 +31,10 @@ function Dashboard () {
           setInDashboard(true)
           setPreDataDashboard(res)
         } catch (err) {
-          console.log(err)
-          userNotHavePermission(isAuthorized, pathname, navigate)
+          userNotHavePermission(!isAuthorized, pathname, navigate)
         }
       } else if (error) {
-        userNotHavePermission(isAuthorized, pathname, navigate)
+        userNotHavePermission(!isAuthorized, pathname, navigate)
       }
     }
 
@@ -141,13 +139,12 @@ function Dashboard () {
                     data={collection}
                     onClick={() => setSelectedCard(collection._id)}
                     isSelected={collection._id === selectedCard}
-                    pin={
+                    statusPin={
                       collection._id === selectedCard && {
                         hasPin: collection.hasPin,
                         id: collection._id
                       }
                     }
-                    axiosCardData={axiosCardData}
                   />
                 </div>
               ))}

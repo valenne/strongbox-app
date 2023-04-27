@@ -4,11 +4,12 @@ import { useContext, useState } from 'react'
 import { SlOptionsVertical } from 'react-icons/sl'
 import { useNavigate } from 'react-router-dom'
 import { HelperContext } from '../../context/HelperContext.jsx'
-import { axiosKeyHandle } from '../../services/createNoteKey.js'
+import { axiosKeyHandle } from '../../services/axiosHandle.js'
 
 export function MenuPopover ({ elementId }) {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
+
   // handle card changed
   const navigate = useNavigate()
   const { setIsCardChange } = useContext(HelperContext)
@@ -17,9 +18,7 @@ export function MenuPopover ({ elementId }) {
     setAnchorEl(event.currentTarget)
   }
 
-  // capture id, then try to update and delete
   const handleClose = event => {
-    // const captureIdCard = event.target.getAttribute('data-elementid')
     const textContentCard = event.target.textContent
 
     if (textContentCard === 'Update') {
@@ -27,7 +26,7 @@ export function MenuPopover ({ elementId }) {
       return navigate('/card', { replace: true })
     } else if (textContentCard === 'Delete') {
       setIsCardChange({ status: true, verb: 'delete' })
-      axiosKeyHandle(elementId, undefined, 'delete')
+      axiosKeyHandle(elementId, undefined, 'delete', 'card')
         .then(data => {
           console.log(data)
           navigate('/dashboard', { replace: false })
@@ -40,7 +39,7 @@ export function MenuPopover ({ elementId }) {
   }
 
   return (
-    <div className='min-h-min min-w-min text-xl z-20 row-start-1 col-start-1 my-2 mx-4 p-2'>
+    <div className='text-xl z-20 row-start-1 col-start-1 px-3 py-5'>
       <SlOptionsVertical
         id='demo-positioned-button'
         aria-controls={open ? 'demo-positioned-menu' : undefined}
@@ -59,10 +58,10 @@ export function MenuPopover ({ elementId }) {
           vertical: 'top',
           horizontal: 'left'
         }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left'
-        }}
+        // transformOrigin={{
+        //   vertical: 'top',
+        //   horizontal: 'left'
+        // }}
       >
         <MenuItem data-elementid={elementId} onClick={handleClose}>
           Update

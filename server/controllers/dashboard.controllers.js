@@ -31,7 +31,6 @@ export const dashboardController = {
           updateAt: 'secret update date'
         }
       })
-      console.log('test 2x')
       res.status(200).send({ user: responseUser, userKeys: responseKeys })
     } catch (err) {
       console.log(`${getDateRecord()} - ${err.message}`)
@@ -41,7 +40,9 @@ export const dashboardController = {
     res.status(200).send({ status: 'success', msg: 'token validate' })
   },
   getDataCard: async (req, res) => {
-    const { id, pin } = req.headers
+    const responseHeaders = req.headers
+    const { id, formdata } = responseHeaders
+    const pin = formdata
 
     try {
       const information = await Key.findOne({ _id: id })

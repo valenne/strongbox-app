@@ -12,13 +12,14 @@ export const keysController = {
   },
   postKey: async (req, res) => {
     console.log(`${getDateRecord()} - POST.keys.controller`)
-    const response = req.headers
+    const responseBody = req.body
 
-    if (!response) {
+    if (!responseBody) {
       return res.status(400).json({ error: 'required parameter missing' })
     }
 
-    const { id, formData } = response
+    const { id, formData } = responseBody.headers
+
     const { category, serviceName, password, description, pin } = formData
 
     // create object data

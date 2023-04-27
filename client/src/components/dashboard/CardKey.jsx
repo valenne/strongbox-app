@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { BsFillUnlockFill } from 'react-icons/bs'
-import { capitalize } from '../../assets/js/helperFunctions'
-
+import { capitalize } from '../../assets/js/helperFunctions.js'
+import { axiosKeyHandle } from '../../services/axiosHandle.js'
 import { MenuPopover } from '../helperComponents/MenuPopover.jsx'
 
-function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCardData }) {
+function CardKey ({ src, alt, data, onClick, isSelected, statusPin }) {
   const [dataPostVerification, setDataPostVerification] = useState({})
   const [error, setError] = useState('')
   const [scForm, setScForm] = useState(true)
@@ -12,24 +12,26 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCardData }) {
   const getCardInfo = e => {
     e.preventDefault()
 
-    const cardForm = Object.fromEntries(new FormData(e.target))
-    const { id } = pin
+    const formCardPin = Object.fromEntries(new FormData(e.target))
 
-    if (Object.keys(cardForm).length === 0) {
-      return axiosCardData(id, null, 'cards')
+    // card id
+    const { id } = statusPin
+
+    // without pin
+    if (Object.keys(formCardPin).length === 0) {
+      return axiosKeyHandle(id, undefined, 'get', 'dashboard/cards')
         .then(result => {
           setDataPostVerification(result)
           setScForm(false)
         })
         .catch(err => console.log(err))
-        .finally(() => {
-          console.log('end of process')
-        })
+        .finally(() => console.log('Loading was done'))
     }
 
-    const { data } = cardForm
+    // with pin
+    const { pin } = formCardPin
 
-    return axiosCardData(id, data, 'cards')
+    return axiosKeyHandle(id, pin, 'get', 'dashboard/cards')
       .then(result => {
         if (result.error) {
           setError('Wrong Pin')
@@ -46,7 +48,7 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCardData }) {
         console.log(err)
         window.alert('Wrong Pin')
       })
-      .finally(() => console.log('end of process'))
+      .finally(() => console.log('Loading was done'))
   }
 
   return (
@@ -67,7 +69,7 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCardData }) {
               alt={alt}
             />
           </picture>
-          <MenuPopover elementId={pin.id} />
+          <MenuPopover elementId={statusPin.id} />
         </div>
         <div className='grid items-center h-56 w-64 text-cyan-50 duration-300 bg-[#000000] p-4 z-10000'>
           <div
@@ -142,7 +144,7 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCardData }) {
 
           <div
             className={`flex flex-col items-center p-2 justify-center ${
-              isSelected & scForm & pin.hasPin ? '' : 'hidden'
+              isSelected & scForm & statusPin.hasPin ? '' : 'hidden'
             }`}
           >
             <form
@@ -162,7 +164,7 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCardData }) {
                     id={data._id}
                     className='w-1/2 text-cyan-50 font-semibold placeholder:text-[#b9dfee5b] p-2 caret-[#034C4F] outline-none ring-2 ring-[#707F8F] focus:ring-[#034C4F] rounded-md bg-[#271f306b]'
                     type='password'
-                    name='data'
+                    name='pin'
                     placeholder='****'
                     maxLength={4}
                     required
@@ -185,7 +187,7 @@ function CardKey ({ src, alt, data, onClick, isSelected, pin, axiosCardData }) {
           {/* haven't pin */}
           <div
             className={`absolute top-10 translate-y-1/2 left-0 duration-300 w-64 ${
-              isSelected & scForm & !pin.hasPin ? '' : 'hidden'
+              isSelected & scForm & !statusPin.hasPin ? '' : 'hidden'
             }`}
           >
             <form
