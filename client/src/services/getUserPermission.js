@@ -6,10 +6,8 @@ export function getUserPermission () {
     JSON.parse(storageLogic.getStorage('user')) !== null
       ? JSON.parse(storageLogic.getStorage('user'))
       : null
-
   if (!localData) {
     return { isAuthorized: false }
   }
-
   return { isAuthorized: true, localData }
 }

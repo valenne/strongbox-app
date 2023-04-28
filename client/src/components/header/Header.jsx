@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import Navbar from './nav/Navbar.jsx'
 import { HelperContext } from '../../context/HelperContext.jsx'
+import Navbar from './nav/Navbar.jsx'
 
 function Header () {
   const { inDashboard, setInDashboard } = useContext(HelperContext)
   return (
-    <section id='header' className='z-10 bg-[#271f30] w-full h-[88px] fixed'>
+    <section id='header' className='z-50 bg-[#271f30] w-full h-[88px] fixed'>
       <header className='w-full h-min'>
         <Navbar onDashboard={inDashboard} setInDashboard={setInDashboard} />
       </header>

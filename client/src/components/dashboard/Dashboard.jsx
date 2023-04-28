@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   capitalize,
+  returnOrdenData,
   userNotHavePermission
 } from '../../assets/js/helperFunctions.js'
 import { HelperContext } from '../../context/HelperContext.jsx'
@@ -13,6 +14,11 @@ function Dashboard () {
   const [preDataDashboard, setPreDataDashboard] = useState({})
   const { setInDashboard, pathname } = useContext(HelperContext)
   const [selectedCard, setSelectedCard] = useState(null)
+  const [ordenData, setOrdenData] = useState({
+    asc: true,
+    desc: false,
+    byDate: false
+  })
 
   const navigate = useNavigate()
   // custom hook
@@ -28,18 +34,37 @@ function Dashboard () {
             return
           }
 
-          setInDashboard(true)
-          setPreDataDashboard(res)
+          if (ordenData.asc) {
+            const result = returnOrdenData(res, ordenData.asc)
+            res.userKeys = result
+            setInDashboard(true)
+            setPreDataDashboard(res)
+            return
+          } else if (ordenData.desc) {
+            const result = returnOrdenData(res, null, ordenData.desc)
+            res.userKeys = result
+            setInDashboard(true)
+            setPreDataDashboard(res)
+            return
+          } else if (ordenData.byDate) {
+            const result = returnOrdenData(res, false, false, ordenData.byDate)
+            res.userKeys = result
+            setInDashboard(true)
+            setPreDataDashboard(res)
+            return
+          }
         } catch (err) {
-          userNotHavePermission(!isAuthorized, pathname, navigate)
+          userNotHavePermission(isAuthorized, pathname, navigate)
         }
       } else if (error) {
-        userNotHavePermission(!isAuthorized, pathname, navigate)
+        userNotHavePermission(isAuthorized, pathname, navigate)
+      } else {
+        userNotHavePermission(isAuthorized, pathname, navigate)
       }
     }
 
     userPermission()
-  }, [])
+  }, [ordenData])
 
   return (
     <section id='dashboard' className='p-5'>
@@ -119,13 +144,28 @@ function Dashboard () {
         <div className='w-full min-h-fit col-start-2 row-start-2 mt-10 col-span-full relative '>
           {/* buttons */}
           <div className='h-fit flex flex-row justify-center gap-4 mx-auto col-start-2 row-start-2 row-end-2 mt-2 mb-4'>
-            <button className=' bg-purple-900 rounded-md hover:bg-cyan-50 hover:text-black text-cyan-50 text-sm py-2 px-3 ease-out duration-300 font-bold'>
+            <button
+              onClick={() =>
+                setOrdenData({ asc: true, desc: false, byDate: false })
+              }
+              className=' bg-purple-900 rounded-md hover:bg-cyan-50 hover:text-black text-cyan-50 text-sm py-2 px-3 ease-out duration-300 font-bold'
+            >
               Orden A-Z
             </button>
-            <button className=' bg-purple-900 rounded-md hover:bg-cyan-50 hover:text-black text-cyan-50 text-sm py-2 px-3 ease-out duration-300 font-bold'>
+            <button
+              onClick={() =>
+                setOrdenData({ asc: false, desc: true, byDate: false })
+              }
+              className=' bg-purple-900 rounded-md hover:bg-cyan-50 hover:text-black text-cyan-50 text-sm py-2 px-3 ease-out duration-300 font-bold'
+            >
               Orden Z-A
             </button>
-            <button className=' bg-purple-900 rounded-md hover:bg-cyan-50 hover:text-black text-cyan-50 text-sm py-2 px-3 ease-out duration-300 font-bold'>
+            <button
+              onClick={() =>
+                setOrdenData({ asc: false, desc: false, byDate: true })
+              }
+              className=' bg-purple-900 rounded-md hover:bg-cyan-50 hover:text-black text-cyan-50 text-sm py-2 px-3 ease-out duration-300 font-bold'
+            >
               Orden by Date
             </button>
           </div>

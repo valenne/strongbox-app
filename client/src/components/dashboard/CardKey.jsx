@@ -54,7 +54,7 @@ function CardKey ({ src, alt, data, onClick, isSelected, statusPin }) {
   return (
     <div
       id='test'
-      className={`flex flex-row gap-2 relative border-[1px] border-[#3F3F50] rounded-md overflow-hidden drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] hover:scale-[1.01] ease-in-out duration-300 group w-64  ${
+      className={`flex flex-row gap-2 relative border-[1px] border-[#3F3F50] rounded-md overflow-hidden  hover:scale-[1.01] hover:drop-shadow-xl hover:border-[#8c8c92] ease-in-out duration-300 group w-64  ${
         scForm ? '' : 'border-[#034C4F]'
       }`}
       data-id={data._id}
@@ -103,7 +103,7 @@ function CardKey ({ src, alt, data, onClick, isSelected, statusPin }) {
             </div>
             <div className='flex flex-row gap-3'>
               <h3 className='text-cyan-50 font-bold text-sm'>Password:</h3>
-              <p className='text-gray-400 text-base'>
+              <p className='text-gray-400 text-sm'>
                 {Object.keys(dataPostVerification).length !== 0
                   ? dataPostVerification.savePassword
                   : data.password}

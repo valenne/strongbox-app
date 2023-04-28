@@ -21,3 +21,30 @@ export function capitalize (str) {
 
   return str.charAt(0).toUpperCase() + lower.slice(1)
 }
+
+export function returnOrdenData (
+  { userKeys },
+  asc = false,
+  desc = false,
+  byDate = false
+) {
+  if (asc) {
+    const ordenAsc = userKeys.sort((a, b) => {
+      return a.serviceName.toLowerCase() < b.serviceName.toLowerCase() ? -1 : 1
+    })
+    return ordenAsc
+  }
+  if (desc) {
+    const ordenDesc = userKeys.sort((a, b) => {
+      return a.serviceName.toLowerCase() > b.serviceName.toLowerCase() ? -1 : 1
+    })
+    return ordenDesc
+  }
+
+  if (byDate) {
+    const ordenByDate = userKeys.sort((a, b) => {
+      return a.createAt - b.createAt
+    })
+    return ordenByDate
+  }
+}
