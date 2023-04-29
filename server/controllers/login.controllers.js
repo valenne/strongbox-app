@@ -33,7 +33,7 @@ export const loginController = {
       const token = jwt.sign(
         {
           data: auth,
-          exp: Math.floor(Date.now() / 1000) + 60 * 60,
+          exp: Math.floor(Date.now() / 1000) + 60 * 15,
           iat: Math.floor(Date.now())
         },
         envConfig.token

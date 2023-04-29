@@ -14,8 +14,8 @@ export function useAxios (pathname) {
       isAuthorized
     }
   }
-
   const { id } = localData.auth
+
   const axiosUserPermission = useCallback(async () => {
     setLoading(true)
 

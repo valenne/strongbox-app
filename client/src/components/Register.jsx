@@ -1,7 +1,7 @@
 /* eslint-disable multiline-ternary */
 import React from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useHandleRegister } from '../hooks/useHandleRegister.js'
-import { useNavigate, useLocation } from 'react-router-dom'
 import RegisterInput from './register/RegisterInput.jsx'
 
 // return if the obj has a value inside
@@ -32,7 +32,7 @@ function Register () {
       return navigate('/', { replace: true })
     }, 1000)
     return window.alert(
-      `Hello ${saveData.current.firstName}, save your recovery password: <${saveData.current.recovery}>`
+      `Hello ${saveData.current.firstName}, save your recovery password: "${saveData.current.recovery}"`
     )
   }
   return (
@@ -84,7 +84,7 @@ function Register () {
                   }}
                   type='submit'
                 >
-                  {loading ? 'Loading...' : 'Sign in'}
+                  {loading ? 'Loading...' : 'Register'}
                 </button>
               </div>
             </form>

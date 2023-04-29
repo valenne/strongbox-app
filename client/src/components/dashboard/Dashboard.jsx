@@ -66,12 +66,38 @@ function Dashboard () {
     userPermission()
   }, [ordenData])
 
+  function transformAndSumCategory (array) {
+    const count = {}
+
+    array.forEach(element => {
+      if (count[element.category]) {
+        count[element.category] += 1
+      } else {
+        count[element.category] = 1
+      }
+    })
+
+    const ordenCount = Object.entries(count).sort((a, b) => {
+      return a > b
+    })
+
+    // console.log(`${key} (${value}) - id=${array[index]._id}`)
+    return ordenCount.map(([key, value], index) => {
+      return (
+        <li className='text-gray-400 text-center' key={array[index]._id}>
+          {`${capitalize(key)} `}
+          <span className='inline-block font-bold text-white'>({value})</span>
+        </li>
+      )
+    })
+  }
+
   return (
     <section id='dashboard' className='p-5'>
       <div className='min-w-full min-h-fit grid grid-cols-5 gap-3 grid-flow-row mt-32 text-cyan-50'>
         <picture className='w-full min-h-fit grid items-center p-3 col-start-1 col-span-1'>
           <img
-            className='w-48 h-48 rounded-full object-cover mx-auto'
+            className='w-48 h-48 rounded-full object-cover mx-auto hover:cursor-pointer hover:hue-rotate-15  duration-300 ease-in-out hover:shadow-cyan-500/50 hover:shadow-lg'
             src={`${
               preDataDashboard.user?.avatarImage
                 ? preDataDashboard.user?.avatarImage
@@ -115,12 +141,15 @@ function Dashboard () {
               Categories
             </h3>
             <ul className='grid grid-cols-1 gap-2'>
-              {preDataDashboard.userKeys &&
+              {/* {preDataDashboard.userKeys &&
                 preDataDashboard.userKeys.map((collection, key) => (
                   <li className='text-gray-400' key={key}>
                     {capitalize(collection.category)}
                   </li>
-                ))}
+                ))} */}
+
+              {preDataDashboard.userKeys &&
+                transformAndSumCategory(preDataDashboard.userKeys)}
             </ul>
           </div>
         </div>
@@ -172,7 +201,7 @@ function Dashboard () {
           <div className='w-full h-full flex flex-row flex-wrap gap-6 px-20 py-10 justify-evenly md:max-xl:justify-center'>
             {preDataDashboard.userKeys &&
               preDataDashboard.userKeys.map(collection => (
-                <div className='card' key={collection._id}>
+                <div className='card cursor-pointer' key={collection._id}>
                   <CardKey
                     src={collection.categoryImg}
                     alt={`contiene imagen con tematica ${collection.category}`}
