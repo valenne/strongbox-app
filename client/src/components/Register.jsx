@@ -11,8 +11,7 @@ const objectHasData = obj => {
 
 function Register () {
   const navigate = useNavigate()
-  const { loading, error, registerProcess, saveData } =
-    useHandleRegister(navigate)
+  const { loading, error, registerProcess, saveData } = useHandleRegister()
   const { pathname } = useLocation()
 
   console.log(pathname)

@@ -4,6 +4,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../services/loginUser.js'
 // hook
+import { MESSAGE_USER } from '../data/messageTypes'
 import { useCredential } from '../hooks/useDataLogin.js'
 import LoginInput from './login/LoginInput.jsx'
 
@@ -26,11 +27,11 @@ function Login () {
 
   useEffect(() => {
     if (userRef.current) {
-      const toastId = toast.loading('Loading...')
+      const toastId = toast.loading(MESSAGE_USER.loggin.loading)
 
       setTimeout(() => {
         toast.dismiss(toastId)
-        toast.success('User logged in successfully')
+        toast.success(MESSAGE_USER.loggin.logTrue)
 
         setTimeout(() => {
           return navigate('/dashboard', { replace: true })

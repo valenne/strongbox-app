@@ -1,0 +1,10 @@
+export const MESSAGE_USER = Object.freeze({
+  loggin: {
+    loading: 'Loading...⏰',
+    logTrue: 'User logged in successfully',
+    userAuthorized: 'User authorized'
+  },
+  error: {
+    duplicateUser: 'Duplicate value username/email already registered'
+  }
+})

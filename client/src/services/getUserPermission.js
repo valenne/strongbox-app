@@ -9,7 +9,7 @@ export function getUserPermission () {
 
   const localData = storageLogic.getStorageExpire('user')
   if (!localData) {
-    return { isAuthorized: false }
+    return { isAuthorized: false, localData: null }
   }
   return { isAuthorized: true, localData }
 }

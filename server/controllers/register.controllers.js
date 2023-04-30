@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
-import { User } from '../db/model/User.js'
-import { envConfig } from '../config/env.config.js'
 import { randomPassword } from '../assets/js/randomPassword.js'
+import { envConfig } from '../config/env.config.js'
+import { User } from '../db/model/User.js'
 
 import { getDateRecord } from '../assets/js/getTimer.js'
 

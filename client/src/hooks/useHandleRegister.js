@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
+import { MESSAGE_USER } from '../data/messageTypes'
 import { registerUser } from '../services/registerUser.js'
 
-export const useHandleRegister = navigate => {
+export const useHandleRegister = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -18,7 +19,7 @@ export const useHandleRegister = navigate => {
           setLoading(false)
           // return navigate('/login', { replace: true })
         } else {
-          setError('Duplicate value username/email already registered')
+          setError(MESSAGE_USER.error.duplicateUser)
           setLoading(false)
         }
       })

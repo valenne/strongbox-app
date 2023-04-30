@@ -100,6 +100,8 @@ export const keysController = {
 
     const { id } = responseHeaders
 
+    console.log(id)
+
     try {
       await Key.findOneAndDelete({ _id: id })
 
