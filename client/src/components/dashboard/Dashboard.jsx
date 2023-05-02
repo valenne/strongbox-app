@@ -116,13 +116,6 @@ function Dashboard () {
               Categories
             </h3>
             <ul className='grid grid-cols-1 gap-2'>
-              {/* {preDataDashboard.userKeys &&
-                preDataDashboard.userKeys.map((collection, key) => (
-                  <li className='text-gray-400' key={key}>
-                    {capitalize(collection.category)}
-                  </li>
-                ))} */}
-
               {preDataDashboard.userKeys &&
                 transformAndSumCategory(preDataDashboard.userKeys)}
             </ul>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { MESSAGE_USER } from '../data/messageTypes'
 
 export const useCredential = () => {
   const [responseLogin, setResponseLogin] = useState({})
@@ -7,19 +8,16 @@ export const useCredential = () => {
   useEffect(() => {
     if (responseLogin.data?.token) {
       setError(null)
-
       return
     }
-
-    if (responseLogin.data?.error === 'Invalid password') {
-      setError('password do not match')
+    if (responseLogin.data?.error === MESSAGE_USER.error.userNotFound) {
+      setError(MESSAGE_USER.error.userNotFound)
       return
     }
-    if (responseLogin.data?.error === 'User not found') {
-      setError('user not found')
+    if (responseLogin.data?.error === MESSAGE_USER.error.invalidPassword) {
+      setError(MESSAGE_USER.error.invalidPassword)
       return
     }
-
     setError(null)
   }, [responseLogin])
 

@@ -1,6 +1,6 @@
 export {
   createKeyInput,
-  LoginDataInput,
+  loginDataInput,
   registerDataInput
 } from './dataInputs.js'
 export { storageLogic } from './localStorageData.js'

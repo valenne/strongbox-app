@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { HelperContext } from '../../context/HelperContext.jsx'
+import { MESSAGE_USER } from '../../data/messageTypes'
 import { useAxios } from '../../hooks/useAxios.js'
 import { axiosKeyHandle } from '../../services/axiosHandle.js'
 import {
@@ -73,7 +74,7 @@ function FormNewKey () {
       const { isNum } = validatPinData(response)
 
       if (!isNum) {
-        return window.alert('Pin should have only numbers')
+        return window.alert(MESSAGE_USER.error.pinOnlyNumbers)
       }
     }
     setDataNewKey(response)

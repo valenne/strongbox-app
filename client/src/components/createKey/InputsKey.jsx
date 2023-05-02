@@ -2,6 +2,7 @@
 import React, { useContext, useState } from 'react'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import { HelperContext } from '../../context/HelperContext.jsx'
+import { MESSAGE_USER } from '../../data/messageTypes'
 import { useCategoriesList } from '../../hooks/useCategories.js'
 
 function InputNormal ({ row }) {
@@ -121,15 +122,15 @@ function InputSelect ({ row }) {
 }
 
 export function InputsKey ({ row }) {
-  if (row.inputType === 'text') {
+  if (row.inputType === MESSAGE_USER.inputTypes.text) {
     return <InputNormal row={row} />
   }
 
-  if (row.inputType === 'password') {
+  if (row.inputType === MESSAGE_USER.inputTypes.password) {
     return <InputPassword row={row} />
   }
 
-  if (row.inputType === 'checkbox') {
+  if (row.inputType === MESSAGE_USER.inputTypes.checkbox) {
     return <InputCheckBox row={row} />
   }
   if (row.inputType === null) {

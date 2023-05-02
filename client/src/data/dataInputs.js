@@ -65,7 +65,7 @@ export const registerDataInput = [
   }
 ]
 
-export const LoginDataInput = [
+export const loginDataInput = [
   {
     labelName: 'Username',
     labelFor: 'username',
@@ -74,7 +74,7 @@ export const LoginDataInput = [
     inputName: 'username',
     placeholder: 'imJhonDoe',
     required: true,
-    regex: /user/
+    regex: /User/
   },
   {
     labelName: 'Password',

@@ -34,6 +34,7 @@ export function useAxios (pathname) {
       setError(null)
       return data
     } catch (err) {
+      console.log(err)
       console.log(err.message)
       setError(err)
     } finally {

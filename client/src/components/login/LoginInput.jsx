@@ -1,11 +1,11 @@
 import React from 'react'
-import { LoginDataInput } from '../../data/dataExports.js'
+import { loginDataInput } from '../../data/dataExports.js'
 
 function LoginInput ({ error }) {
   return (
     <div className='w-full flex flex-col justify-content'>
-      {LoginDataInput &&
-        LoginDataInput.map((row, key) => (
+      {loginDataInput &&
+        loginDataInput.map((row, key) => (
           <div key={key} className='w-full flex flex-col gap-3 px-5'>
             <label
               className='text-cyan-50 text-lg pt-2 pr-2 pb-2'
