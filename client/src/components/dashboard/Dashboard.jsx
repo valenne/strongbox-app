@@ -40,6 +40,7 @@ function Dashboard () {
             res.userKeys = result
             setInDashboard(true)
             setPreDataDashboard(res)
+
             return
           } else if (ordenData.desc) {
             const result = returnOrdenData(res, null, ordenData.desc)
@@ -55,11 +56,14 @@ function Dashboard () {
             return
           }
         } catch (err) {
+          console.log('dashboard', err)
           userNotHavePermission(isAuthorized, pathname, navigate)
         }
-      } else if (error) {
-        userNotHavePermission(isAuthorized, pathname, navigate)
-      } else {
+      }
+      //  else if (error) {
+      //   userNotHavePermission(isAuthorized, pathname, navigate)
+      // }
+      else {
         userNotHavePermission(isAuthorized, pathname, navigate)
       }
     }

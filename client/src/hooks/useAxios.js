@@ -35,8 +35,9 @@ export function useAxios (pathname) {
       return data
     } catch (err) {
       console.log(err)
-      console.log(err.message)
       setError(err)
+
+      return { error: err.response.status }
     } finally {
       setLoading(false)
     }
