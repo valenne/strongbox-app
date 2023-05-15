@@ -45,13 +45,13 @@ TOKEN_SECRET = (insert here your secret password)
 ```
 
 3. Start the app:
-*3.1 in a MongoDB terminal or powershell type to connect to a your db: *
+3.1 in a MongoDB terminal or powershell type to connect to a your db:
 ```
 mongod
 
 ```
-*3.2 in mongodb Compass, in new Connecion write: mongodb://localhost:(27017) ⬅ port *
-*3.3 open the proyect, and follow the next steps: *
+3.2 in mongodb Compass, in new Connecion write: mongodb://localhost:(27017) ⬅ port
+3.3 open the proyect, and follow the next steps: 
 ```
 cd server/
 npm run start
