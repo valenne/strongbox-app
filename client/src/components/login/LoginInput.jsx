@@ -2,6 +2,7 @@ import React from 'react'
 import { loginDataInput } from '../../data/dataExports.js'
 
 function LoginInput ({ error }) {
+  console.log(loginDataInput)
   return (
     <div className='w-full flex flex-col justify-content'>
       {loginDataInput &&

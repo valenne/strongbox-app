@@ -9,6 +9,7 @@ import Header from './components/header/Header.jsx'
 // importing components
 import Home from './components/Home.jsx'
 import Register from './components/Register.jsx'
+import User from './components/user/User.jsx'
 
 function App () {
   return (
@@ -20,6 +21,7 @@ function App () {
         <Route path='/login' element={<Login />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/card' element={<FormNewKey />} />
+        <Route path='/user' element={<User />} />
       </Routes>
     </main>
   )

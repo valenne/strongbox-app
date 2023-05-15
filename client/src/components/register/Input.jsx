@@ -1,6 +1,6 @@
 /* eslint-disable multiline-ternary */
 import React from 'react'
-import { useQuestionList } from '../../../hooks/useQuestionList.js'
+import { useQuestionList } from '../../hooks/useQuestionList.js'
 
 function Input ({ string, value, placeholder, type = 'text', isTypeSelect }) {
   const { renderOptions } = useQuestionList()
@@ -52,4 +52,3 @@ function Input ({ string, value, placeholder, type = 'text', isTypeSelect }) {
 }
 
 export default Input
-// working on styles all the element with tailwind, then i can pass to dashboard logic

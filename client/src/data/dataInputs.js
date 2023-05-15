@@ -30,7 +30,7 @@ export const registerDataInput = [
     labelName: 'Email',
     labelFor: 'email',
     inputId: 'email',
-    inputType: 'email',
+    inputType: 'text',
     inputName: 'email',
     placeholder: 'jhondoe@email.com',
     required: true

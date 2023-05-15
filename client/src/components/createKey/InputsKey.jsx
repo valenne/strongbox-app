@@ -6,6 +6,7 @@ import { MESSAGE_USER } from '../../data/messageTypes'
 import { useCategoriesList } from '../../hooks/useCategories.js'
 
 function InputNormal ({ row }) {
+  console.log(row)
   return (
     <>
       <label className='text-cyan-50 text-lg pt-2 pr-2' htmlFor={row.labelFor}>

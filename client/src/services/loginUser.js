@@ -7,7 +7,7 @@ export async function loginUser (loginData) {
     const response = await axios.post('http://localhost:3000/login', loginData)
 
     if (response.data.token) {
-      storageLogic.setStorage('user', response.data, 60 * 1000)
+      storageLogic.setStorage('user', response.data, 14 * 60000)
       // localStorage.setItem('user', JSON.stringify(response.data))
     }
     return response

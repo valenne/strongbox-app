@@ -59,11 +59,7 @@ function Dashboard () {
           console.log('dashboard', err)
           userNotHavePermission(isAuthorized, pathname, navigate)
         }
-      }
-      //  else if (error) {
-      //   userNotHavePermission(isAuthorized, pathname, navigate)
-      // }
-      else {
+      } else {
         userNotHavePermission(isAuthorized, pathname, navigate)
       }
     }

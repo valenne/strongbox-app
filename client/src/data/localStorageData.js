@@ -5,6 +5,7 @@ export const storageLogic = {
 
     // `item` is an object which contains the original value
     // as well as the time when it's supposed to expire
+    // the expiry time is in ms, what is mean 1min = 60000ms
     const item = {
       value,
       expiry: now.getTime() + ttl
